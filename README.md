@@ -1,4 +1,6 @@
-## Hi there 👋
+## Welcome!
+
+Hello, My name is Tyler Moessing. I am currently attending Brigham Young University in Provo, UT studying Machine Learning.
 
 <!--
 **tmoessing/tmoessing** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
