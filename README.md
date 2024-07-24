@@ -10,7 +10,7 @@ Hello, my name is Tyler Moessing. I am currently attending Brigham Young Univers
 
 **Tools and Frameworks:** 
 
-[![Tools and Frameworks](https://skillicons.dev/icons?i=aws,git,sklearn,react,dynamodb,mongodb)](#projects)
+[![Tools and Frameworks](https://skillicons.dev/icons?i=aws,git,sklearn,react,dynamodb,mongodb,matlab)](#projects)
 
 <!-- Technical Skills Logos https://github.com/tandpfun/skill-icons -->
 
