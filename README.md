@@ -6,11 +6,11 @@ Hello, my name is Tyler Moessing. I am currently attending Brigham Young Univers
 
 **Programming Languages:** 
 
-[![My Skills](https://skillicons.dev/icons?i=py,cpp,js,bash,html,css)](https://skillicons.dev)
+[![Programming Languages](https://skillicons.dev/icons?i=py,cpp,js,bash,html,css)](#projects)
 
 **Tools and Frameworks:** 
 
-[![My Skills](https://skillicons.dev/icons?i=aws,git,sklearn,react,dynamodb,mongodb)](https://skillicons.dev)
+[![Tools and Frameworks](https://skillicons.dev/icons?i=aws,git,sklearn,react,dynamodb,mongodb)](#projects)
 
 <!-- Technical Skills Logos https://github.com/tandpfun/skill-icons -->
 
@@ -26,4 +26,8 @@ Hello, my name is Tyler Moessing. I am currently attending Brigham Young Univers
 - Team won 1st place in the Colorado state tournament among approximately 10 teams
 - Earned an invitation to the National Championship
 
-<sub> tmoessing@gmail.com</sub>  <sub>[LinkedIn](https://www.linkedin.com/in/tyler-moessing/) </sub>
+### Contact Me
+[![LinkedIn](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/tyler-moessing/)
+[![Gmail](https://skillicons.dev/icons?i=gmail)](mailto:tmoessing@gmail.com)
+
+<!-- <sub> tmoessing@gmail.com</sub>  <sub>[LinkedIn](https://www.linkedin.com/in/tyler-moessing/) </sub> -->
