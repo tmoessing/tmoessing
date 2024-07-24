@@ -6,7 +6,7 @@ Hello, my name is Tyler Moessing. I am currently attending Brigham Young Univers
 
 **Programming Languages:** 
 
-[![My Skills](https://skillicons.dev/icons?i=py,html,css,bash,cpp,java)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=py,cpp,js,bash,html,css)](https://skillicons.dev)
 
 **Tools and Frameworks:** 
 
