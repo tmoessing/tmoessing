@@ -27,7 +27,7 @@ Hello, my name is Tyler Moessing. I am currently attending Brigham Young Univers
 - Earned an invitation to the National Championship
 
 ### Contact Me
-[![LinkedIn](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/tyler-moessing/)
+[![LinkedIn](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/tmoessing/)
 [![Gmail](https://skillicons.dev/icons?i=gmail)](mailto:tmoessing@gmail.com)
 
 <!-- <sub> tmoessing@gmail.com</sub>  <sub>[LinkedIn](https://www.linkedin.com/in/tyler-moessing/) </sub> -->
