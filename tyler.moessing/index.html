@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyler Moessing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+            padding: 10px 20px;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+
+        .sticky-header.show {
+            transform: translateY(0);
+        }
+
+        .sticky-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sticky-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .sticky-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .sticky-buttons .social-btn {
+            padding: 4px 8px;
+            font-size: 0.7rem;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .social-btn {
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.8rem;
+        }
+
+        .linkedin {
+            background: #0077b5;
+            color: white;
+        }
+
+        .github {
+            background: #333;
+            color: white;
+        }
+
+        .facebook {
+            background: #4267B2;
+            color: white;
+        }
+
+        .email {
+            background: #ea4335;
+            color: white;
+        }
+
+        .donut-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(255, 107, 107, 0.3);
+            margin-top: 15px;
+            display: inline-block;
+            position: relative;
+            animation: gentle-bounce 2s ease-in-out infinite;
+        }
+
+        .donut-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: auto;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            transition: transform 0.3s ease;
+        }
+
+        .photo-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .read-more-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .additional-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .additional-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto 15px auto;
+            display: block;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .social-buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .social-btn {
+                font-size: 0.7rem;
+                padding: 5px 10px;
+            }
+
+            .donut-btn {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+                margin-top: 12px;
+            }
+
+            .sticky-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .sticky-title {
+                font-size: 1.2rem;
+            }
+
+            .sticky-buttons {
+                gap: 6px;
+            }
+
+            .sticky-buttons .social-btn {
+                padding: 3px 6px;
+                font-size: 0.65rem;
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .photo-placeholder {
+                margin: 0 auto;
+            }
+
+            .profile-photo {
+                width: 150px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.5rem;
+            }
+
+            .about-text p {
+                font-size: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .project-card {
+                max-width: none;
+                margin: 0;
+                padding: 15px;
+            }
+
+            .project-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .project-title {
+                font-size: 1.3rem;
+            }
+
+            .project-description {
+                font-size: 0.95rem;
+            }
+
+            .content-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+
+            .header {
+                padding: 30px 15px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .social-buttons {
+                gap: 6px;
+            }
+
+            .social-btn {
+                font-size: 0.65rem;
+                padding: 4px 8px;
+            }
+
+            .donut-btn {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.3rem;
+            }
+
+            .about-text p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .project-card {
+                padding: 12px;
+            }
+
+            .project-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+            }
+
+            .project-description {
+                font-size: 0.9rem;
+            }
+
+            .read-more-btn, .project-link {
+                font-size: 0.85rem;
+                padding: 8px 15px;
+            }
+
+            .content-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .header {
+                padding: 25px 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">Tyler Moessing</h1>
+            
+            <div class="social-buttons">
+                <a href="https://www.linkedin.com/in/tmoessing/" target="_blank" class="social-btn linkedin">LinkedIn</a>
+                <a href="https://github.com/tmoessing" target="_blank" class="social-btn github">GitHub</a>
+                <a href="https://www.facebook.com/tyler.moessing" target="_blank" class="social-btn facebook">Facebook</a>
+                <a href="mailto:tyler@moessing.com" class="social-btn email">Email</a>
+            </div>
+        </header>
+
+        <section class="content-section">
+            <h2 class="section-title">About</h2>
+            <div class="about-section">
+                <div class="photo-placeholder">
+                  <img src="profile_pic.jpeg" alt="Tyler Moessing" class="profile-photo">
+                </div>
+                <div class="about-text">
+                    <h3>Learn more about Tyler</h3>
+                    <p>Tyler Moessing is a Computer Science student at Brigham Young University, graduating in April 2027 with an emphasis in Machine Learning and a minor in Statistics. With a 3.98 GPA and multiple academic scholarships, he has distinguished himself through strong coursework in data structures, linear algebra, and advanced software construction, with plans to complete specialized courses in machine learning, AI, and NLP.</p>
+                    
+                    <button class="read-more-btn" onclick="toggleReadMore()">Read More</button>
+                    
+                    <div class="additional-content" id="additionalContent">
+                        <p>Tyler's technical toolkit spans Python, C/C++, Java, and JavaScript, with practical experience in AWS deployment, Git, and MongoDB. He has applied these skills in diverse roles, including developing Alexa apps with over 10,000 users, fine-tuning YOLOv7 models for real-world vehicle detection at Spot Parking, building analytics pipelines for BYU Basketball, and maintaining web infrastructure at BYU Creative Works. His research at BYU led to a machine learning system classifying figure skating jumps, improving accuracy by 15% and earning him a presentation slot at an international conference in the Netherlands.</p>
+                        
+                        <p>Beyond academics, Tyler has served as a tutor, code instructor, and youth counselor, reflecting his commitment to mentorship and service. He also volunteers as an officer in the Competitive Programming Club, where he helps organize coding competitions and supports peer learning. With projects ranging from battle bots to AI-driven sports analytics, Tyler thrives at the intersection of problem-solving, innovation, and teamwork. Driven, adaptable, and deeply curious, he is building a career that combines technical excellence with creativity and impact.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Creations</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="jimmy_project.jpg" alt="Jimmy in the House project screenshot" class="project-image">
+                    <h3 class="project-title">Jimmy in the House</h3>
+                    <p class="project-description">
+                        <strong>Jimmy in the House gives you a daily shower thought.</strong> In high school, Tyler created a Remind class called <em>"Jimmy in the House"</em> with 60 recipients who got fun thoughts every day. The name came from a fake identity he once used in a group chat with strangers — he called himself "Jimmy," and the name stuck.
+                        <br><br>
+                        His goal was simple: bring a smile to people each day. One recipient even told him, <em>"You are a hoot."</em> Hopefully, his "You Thought of the Day" messages brightened someone's day. The Reminds may have stopped, but this website carries on Jimmy's legacy.
+                    </p>
+                    <a href="https://tmoessing.github.io/jimmy_in_the_house_website/" target="_blank" class="project-link">View Project</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Currently Working On</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Messed up Farm</h3>
+                    <p class="project-description">
+                        Tyler is creating a game in Python with one of his close friends. It will be a top-down roguelike game featuring a cow, a pig, and possibly a goat as the main characters. The two are choosing to code everything by hand rather than rely on vibe coding with AI, since they wanted the project to challenge them, strengthen their problem-solving skills, and help them truly learn the tools of development.
+                        <br><br>
+                        This hands-on approach means the project will take longer to finish, but it also makes the process itself valuable. Once completed, it promises to be a unique and entertaining gaming experience. The project will probably take 2 years because they are working in school and are busy with other things.
+                    </p>
+                    <a href="#" class="project-link">In Development</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://venmo.com/tmoessing" target="_blank" class="donut-btn">🍩 Buy a Developer a Donut</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sticky Header -->
+    <div class="sticky-header" id="stickyHeader">
+        <div class="sticky-content">
+            <h1 class="sticky-title">Tyler Moessing</h1>
+            <div class="sticky-buttons">
+                <a href="https://www.linkedin.com/in/tmoessing/" target="_blank" class="social-btn linkedin">LinkedIn</a>
+                <a href="https://github.com/tmoessing" target="_blank" class="social-btn github">GitHub</a>
+                <a href="https://www.facebook.com/tyler.moessing" target="_blank" class="social-btn facebook">Facebook</a>
+                <a href="mailto:tyler@moessing.com" class="social-btn email">Email</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleReadMore() {
+            const additionalContent = document.getElementById('additionalContent');
+            const button = document.querySelector('.read-more-btn');
+            
+            if (additionalContent.classList.contains('show')) {
+                additionalContent.classList.remove('show');
+                button.textContent = 'Read More';
+            } else {
+                additionalContent.classList.add('show');
+                button.textContent = 'Read Less';
+            }
+        }
+
+        // Sticky header functionality
+        window.addEventListener('scroll', function() {
+            const stickyHeader = document.getElementById('stickyHeader');
+            const originalHeader = document.querySelector('.header');
+            const headerBottom = originalHeader.offsetTop + originalHeader.offsetHeight;
+            
+            if (window.scrollY > headerBottom) {
+                stickyHeader.classList.add('show');
+            } else {
+                stickyHeader.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
