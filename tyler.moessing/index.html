@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyler Moessing</title>
     <link rel="icon" type="image/png" href="resources/logo.png" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <style>
         * {
             margin: 0;
@@ -131,24 +134,12 @@
         }
 
         .donut-btn {
-            background: linear-gradient(135deg, #ff6b6b, #ffa500);
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 12px rgba(255, 107, 107, 0.3);
-            margin-top: 15px;
-            display: inline-block;
             position: relative;
             animation: gentle-bounce 2s ease-in-out infinite;
         }
 
         .donut-btn:hover {
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
         }
 
         @keyframes gentle-bounce {
@@ -194,7 +185,18 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 30px;
-            align-items: center;
+            align-items: start;
+        }
+
+        .about-section .photo-placeholder {
+            grid-column: 1;
+            grid-row: 1;
+            justify-self: center;
+        }
+
+        .about-section .about-text {
+            grid-column: 2;
+            grid-row: 1;
         }
 
         .profile-photo {
@@ -225,21 +227,41 @@
             margin-bottom: 15px;
         }
 
-        .read-more-btn {
+        /* Unified Button System */
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            text-decoration: none;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
+            border-radius: 20px;
             font-weight: bold;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
             margin-top: 10px;
+            cursor: pointer;
+            box-sizing: border-box;
+            line-height: 1;
+            vertical-align: middle;
         }
 
-        .read-more-btn:hover {
+        .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn--primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .btn--secondary {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            box-shadow: 0 3px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn--secondary:hover {
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
         }
 
         .additional-content {
@@ -259,6 +281,20 @@
             to { opacity: 1; }
         }
 
+        .project-short-description {
+            display: block;
+        }
+
+        .project-full-description {
+            display: none;
+        }
+
+        .project-full-description.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -273,8 +309,12 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
-            max-width: 400px;
+            max-width: 800px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 20px;
+            align-items: start;
         }
 
         .project-card:hover {
@@ -282,13 +322,33 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
+        .simple-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .simple-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
         .project-image {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 8px;
-            margin: 0 auto 15px auto;
-            display: block;
+            grid-column: 2;
+            grid-row: 1 / -1;
+        }
+
+        .project-content {
+            grid-column: 1;
         }
 
         .project-title {
@@ -304,20 +364,25 @@
             line-height: 1.6;
         }
 
-        .project-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
 
-        .project-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        @media (max-width: 1024px) {
+            .project-card {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                max-width: 500px;
+            }
+
+            .project-image {
+                grid-column: 1;
+                grid-row: auto;
+                margin: 0 auto;
+                width: 180px;
+                height: 180px;
+            }
+
+            .project-content {
+                grid-column: 1;
+            }
         }
 
         @media (max-width: 768px) {
@@ -367,8 +432,14 @@
                 gap: 20px;
             }
 
-            .photo-placeholder {
+            .about-section .photo-placeholder {
+                grid-column: 1;
+                order: -1;
                 margin: 0 auto;
+            }
+
+            .about-section .about-text {
+                grid-column: 1;
             }
 
             .profile-photo {
@@ -396,11 +467,20 @@
                 max-width: none;
                 margin: 0;
                 padding: 15px;
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .project-image {
                 width: 140px;
                 height: 140px;
+                grid-column: 1;
+                grid-row: auto;
+                margin: 0 auto;
+            }
+
+            .project-content {
+                grid-column: 1;
             }
 
             .project-title {
@@ -474,7 +554,7 @@
                 font-size: 0.9rem;
             }
 
-            .read-more-btn, .project-link {
+            .btn {
                 font-size: 0.85rem;
                 padding: 8px 15px;
             }
@@ -517,7 +597,7 @@
                     <h3>Learn more about Tyler</h3>
                     <p>Tyler Moessing is a Computer Science student at Brigham Young University, graduating in April 2027 with an emphasis in Machine Learning and a minor in Statistics. With a 3.98 GPA and multiple academic scholarships, he has distinguished himself through strong coursework in data structures, linear algebra, and advanced software construction, with plans to complete specialized courses in machine learning, AI, and NLP.</p>
                     
-                    <button class="read-more-btn" onclick="toggleReadMore()">Read More</button>
+                    <button class="btn btn--primary" onclick="toggleReadMore()">Read More</button>
                     
                     <div class="additional-content" id="additionalContent">
                         <p>Tyler's technical toolkit spans Python, C/C++, Java, and JavaScript, with practical experience in AWS deployment, Git, and MongoDB. He has applied these skills in diverse roles, including developing Alexa apps with over 10,000 users, fine-tuning YOLOv7 models for real-world vehicle detection at Spot Parking, building analytics pipelines for BYU Basketball, and maintaining web infrastructure at BYU Creative Works. His research at BYU led to a machine learning system classifying figure skating jumps, improving accuracy by 15% and earning him a presentation slot at an international conference in the Netherlands.</p>
@@ -549,31 +629,51 @@
             <h2 class="section-title">Creations</h2>
             <div class="projects-grid">
                 <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Jimmy in the House</h3>
+                        <div class="project-short-description">
+                            <p class="project-description">
+                                <strong>Jimmy in the House gives you a daily shower thought.</strong> A high school project that brought daily smiles to 60 recipients through fun daily thoughts.
+                            </p>
+                        </div>
+                        <div class="project-full-description" id="jimmyFullDescription">
+                            <p class="project-description">
+                                <strong>Jimmy in the House gives you a daily shower thought.</strong> In high school, Tyler created a Remind class called <em>"Jimmy in the House"</em> with 60 recipients who got fun thoughts every day. The name came from a fake identity he once used in a group chat with strangers — he called himself "Jimmy," and the name stuck.
+                                <br><br>
+                                His goal was simple: bring a smile to people each day. One recipient even told him, <em>"You are a hoot."</em> Hopefully, his "You Thought of the Day" messages brightened someone's day. The Reminds may have stopped, but this website carries on Jimmy's legacy.
+                            </p>
+                        </div>
+                        <button class="btn btn--primary" onclick="toggleProjectReadMore('jimmyFullDescription', this)">Read More</button>
+                        <a href="https://tmoessing.github.io/jimmy_in_the_house_website/" target="_blank" class="btn btn--primary">View Project</a>
+                    </div>
                     <img src="resources/jimmy_project.jpg" alt="Jimmy in the House project screenshot" class="project-image">
-                    <h3 class="project-title">Jimmy in the House</h3>
-                    <p class="project-description">
-                        <strong>Jimmy in the House gives you a daily shower thought.</strong> In high school, Tyler created a Remind class called <em>"Jimmy in the House"</em> with 60 recipients who got fun thoughts every day. The name came from a fake identity he once used in a group chat with strangers — he called himself "Jimmy," and the name stuck.
-                        <br><br>
-                        His goal was simple: bring a smile to people each day. One recipient even told him, <em>"You are a hoot."</em> Hopefully, his "You Thought of the Day" messages brightened someone's day. The Reminds may have stopped, but this website carries on Jimmy's legacy.
-                    </p>
-                    <a href="https://tmoessing.github.io/jimmy_in_the_house_website/" target="_blank" class="project-link">View Project</a>
                 </div>
 
                 <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">DASH</h3>
+                        <div class="project-short-description">
+                            <p class="project-description">
+                                <strong>DASH is Tyler's personal productivity dashboard.</strong> A clean, customizable interface for managing app shortcuts with drag-and-drop functionality.
+                            </p>
+                        </div>
+                        <div class="project-full-description" id="dashFullDescription">
+                            <p class="project-description">
+                                <strong>DASH is Tyler's personal productivity dashboard.</strong> Built with vanilla JavaScript and modern CSS, DASH provides a clean, customizable interface for managing app shortcuts with drag-and-drop functionality. Tyler designed it to be his digital command center, combining organization with inspiration through rotating "fire quotes."
+                                <br><br>
+                                The project showcases his commitment to clean, framework-free development. With 200+ app icons, local storage persistence, and responsive design, DASH demonstrates Tyler's ability to create polished user experiences from scratch. It's his solution to digital clutter and a testament to the power of thoughtful, minimalist design.
+                            </p>
+                        </div>
+                        <button class="btn btn--primary" onclick="toggleProjectReadMore('dashFullDescription', this)">Read More</button>
+                        <a href="https://tmoessing.github.io/DASH/" target="_blank" class="btn btn--primary">View Project</a>
+                    </div>
                     <img src="resources/DASH.png" alt="DASH dashboard screenshot" class="project-image">
-                    <h3 class="project-title">DASH</h3>
-                    <p class="project-description">
-                        <strong>DASH is Tyler's personal productivity dashboard.</strong> Built with vanilla JavaScript and modern CSS, DASH provides a clean, customizable interface for managing app shortcuts with drag-and-drop functionality. Tyler designed it to be his digital command center, combining organization with inspiration through rotating "fire quotes."
-                        <br><br>
-                        The project showcases his commitment to clean, framework-free development. With 200+ app icons, local storage persistence, and responsive design, DASH demonstrates Tyler's ability to create polished user experiences from scratch. It's his solution to digital clutter and a testament to the power of thoughtful, minimalist design.
-                    </p>
-                    <a href="https://tmoessing.github.io/tmoessing.board/" target="_blank" class="project-link">View Project</a>
                 </div>
 
             </div>
             
             <div style="text-align: center; margin-top: 30px;">
-                <a href="https://venmo.com/tmoessing" target="_blank" class="donut-btn">🍩 Buy a Developer a Donut</a>
+                <a href="https://venmo.com/tmoessing" target="_blank" class="btn btn--secondary donut-btn">🍩 Buy a Developer a Donut</a>
             </div>
         </section>
 
@@ -581,63 +681,83 @@
             <h2 class="section-title">Currently Working On</h2>
             <div class="projects-grid">
                 <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Life Scrub Board</h3>
+                        <div class="project-short-description">
+                            <p class="project-description">
+                                <strong>Life Scrub Board brings Scrum methodologies to personal life management.</strong> A React application that applies agile practices to personal productivity with story management and kanban boards.
+                            </p>
+                        </div>
+                        <div class="project-full-description" id="lsbFullDescription">
+                            <p class="project-description">
+                                <strong>Life Scrub Board brings Scrum methodologies to personal life management.</strong> Tyler built this React application to organize his life using proven agile practices, featuring story management, sprint planning, and kanban boards. It's his solution for applying software development methodologies to personal productivity.
+                                <br><br>
+                                Built with React, TypeScript, and modern web technologies, the project demonstrates Tyler's full-stack capabilities and his innovative approach to problem-solving. With data visualization, backup functionality, and multiple view modes, Life Scrub Board showcases his ability to create sophisticated applications that solve real-world problems.
+                            </p>
+                        </div>
+                        <button class="btn btn--primary" onclick="toggleProjectReadMore('lsbFullDescription', this)">Read More</button>
+                        <a href="https://tmoessing.github.io/life.planner/" target="_blank" class="btn btn--primary">View Current State</a>
+                    </div>
                     <img src="resources/lsb.png" alt="Life Scrub Board screenshot" class="project-image">
-                    <h3 class="project-title">Life Scrub Board</h3>
-                    <p class="project-description">
-                        <strong>Life Scrub Board brings Scrum methodologies to personal life management.</strong> Tyler built this React application to organize his life using proven agile practices, featuring story management, sprint planning, and kanban boards. It's his solution for applying software development methodologies to personal productivity.
-                        <br><br>
-                        Built with React, TypeScript, and modern web technologies, the project demonstrates Tyler's full-stack capabilities and his innovative approach to problem-solving. With data visualization, backup functionality, and multiple view modes, Life Scrub Board showcases his ability to create sophisticated applications that solve real-world problems.
-                    </p>
-                    <a href="https://tmoessing.github.io/life.planner/" target="_blank" class="project-link">View Current State</a>
                 </div>
 
                 <div class="project-card">
-                    <h3 class="project-title">Messed up Farm</h3>
-                    <p class="project-description">
-                        Tyler is creating a game in Python with one of his close friends. It will be a top-down roguelike game featuring a cow, a pig, and possibly a goat as the main characters. The two are choosing to code everything by hand rather than rely on vibe coding with AI, since they wanted the project to challenge them, strengthen their problem-solving skills, and help them truly learn the tools of development.
-                        <br><br>
-                        This hands-on approach means the project will take longer to finish, but it also makes the process itself valuable. Once completed, it promises to be a unique and entertaining gaming experience. The project will probably take 2 years because they are working in school and are busy with other things.
-                    </p>
-                    <p style="color: #666; font-style: italic; margin-top: 15px;">In Development</p>
+                    <div class="project-content">
+                        <h3 class="project-title">Messed up Farm</h3>
+                        <div class="project-short-description">
+                            <p class="project-description">
+                                Tyler is creating a top-down roguelike game in Python featuring farm animals as main characters. A hands-on coding project designed to strengthen problem-solving skills.
+                            </p>
+                        </div>
+                        <div class="project-full-description" id="farmFullDescription">
+                            <p class="project-description">
+                                Tyler is creating a game in Python with one of his close friends. It will be a top-down roguelike game featuring a cow, a pig, and possibly a goat as the main characters. The two are choosing to code everything by hand rather than rely on vibe coding with AI, since they wanted the project to challenge them, strengthen their problem-solving skills, and help them truly learn the tools of development.
+                                <br><br>
+                                This hands-on approach means the project will take longer to finish, but it also makes the process itself valuable. Once completed, it promises to be a unique and entertaining gaming experience. The project will probably take 2 years because they are working in school and are busy with other things.
+                            </p>
+                        </div>
+                        <button class="btn btn--primary" onclick="toggleProjectReadMore('farmFullDescription', this)">Read More</button>
+                        <p style="color: #666; font-style: italic; margin-top: 15px;">In Development</p>
+                    </div>
                 </div>
             </div>
         </section>
         <section class="content-section">
         <h2 class="section-title">Helpful Links</h2>
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="simple-card">
                 <h3 class="project-title">Do Not Call Registry</h3>
                 <p class="project-description">
                     Tired of spam calls? Add your number to the official <em>Do Not Call</em> list. 
-                    It won’t block every scammer, but it cuts down on a ton of junk.
+                    It won't block every scammer, but it cuts down on a ton of junk.
                 </p>
-                <a href="https://www.donotcall.gov/" target="_blank" class="project-link">Visit Site</a>
+                <a href="https://www.donotcall.gov/" target="_blank" class="btn btn--primary">Visit Site</a>
             </div>
 
-            <div class="project-card">
+            <div class="simple-card">
                 <h3 class="project-title">Opt-Out Prescreen</h3>
                 <p class="project-description">
                     Want fewer credit card offers in the mail? This site lets you opt-out of prescreened 
                     credit and insurance offers. Save your mailbox (and a few trees).
                 </p>
-                <a href="https://www.optoutprescreen.com/" target="_blank" class="project-link">Visit Site</a>
+                <a href="https://www.optoutprescreen.com/" target="_blank" class="btn btn--primary">Visit Site</a>
             </div>
 
-            <div class="project-card">
+            <div class="simple-card">
                 <h3 class="project-title">BYU Alumni AT&T Plan</h3>
                 <p class="project-description">
                     If you ever attended at least one semester at BYU, you qualify for the 
                     <strong>AT&T Alumni Discounted Cell Phone Plan</strong>. 
-                    It’s a sweet deal on your monthly bill — definitely worth hopping on.
+                    It's a sweet deal on your monthly bill — definitely worth hopping on.
                 </p>
-                <a href="https://alumni.byu.edu/at-t-discounted-cell-phone-plan" target="_blank" class="project-link">Learn More</a>
+                <a href="https://alumni.byu.edu/at-t-discounted-cell-phone-plan" target="_blank" class="btn btn--primary">Learn More</a>
             </div>
-            <div class="project-card">
+            <div class="simple-card">
                 <h3 class="project-title">Perplexity - Comet</h3>
                 <p class="project-description">
-                    Perplexity just launched Comet, an AI agent for your browser — and it’s insane. Fast, smart, beautifully designed. It’s the new new of how we explore the web. Use my invite link below.              
+                    Perplexity just launched Comet, an AI agent for your browser — and it's insane. Fast, smart, beautifully designed. It's the new new of how we explore the web. Use my invite link below.              
                 </p>
-                <a href="https://perplexity.ai/browser/claim/U4DLBK3QHV" target="_blank" class="project-link">Check it Out</a>
+                <a href="https://perplexity.ai/browser/claim/U4DLBK3QHV" target="_blank" class="btn btn--primary">Check it Out</a>
             </div>
         </div>
     </section>
@@ -672,13 +792,28 @@
     <script>
         function toggleReadMore() {
             const additionalContent = document.getElementById('additionalContent');
-            const button = document.querySelector('.read-more-btn');
+            const button = document.querySelector('.about-section .btn--primary');
             
             if (additionalContent.classList.contains('show')) {
                 additionalContent.classList.remove('show');
                 button.textContent = 'Read More';
             } else {
                 additionalContent.classList.add('show');
+                button.textContent = 'Read Less';
+            }
+        }
+
+        function toggleProjectReadMore(fullDescriptionId, button) {
+            const fullDescription = document.getElementById(fullDescriptionId);
+            const shortDescription = fullDescription.previousElementSibling;
+            
+            if (fullDescription.classList.contains('show')) {
+                fullDescription.classList.remove('show');
+                shortDescription.style.display = 'block';
+                button.textContent = 'Read More';
+            } else {
+                fullDescription.classList.add('show');
+                shortDescription.style.display = 'none';
                 button.textContent = 'Read Less';
             }
         }
