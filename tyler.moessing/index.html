@@ -428,18 +428,21 @@
 
             .about-section {
                 grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
                 text-align: center;
-                gap: 20px;
+                gap: 30px;
             }
 
             .about-section .photo-placeholder {
                 grid-column: 1;
-                order: -1;
+                grid-row: 1;
                 margin: 0 auto;
+                margin-bottom: 10px;
             }
 
             .about-section .about-text {
                 grid-column: 1;
+                grid-row: 2;
             }
 
             .profile-photo {
@@ -535,6 +538,14 @@
             .about-text p {
                 font-size: 0.95rem;
                 line-height: 1.6;
+            }
+
+            .about-section {
+                gap: 25px;
+            }
+
+            .about-section .photo-placeholder {
+                margin-bottom: 15px;
             }
 
             .project-card {
@@ -661,7 +672,7 @@
                             <p class="project-description">
                                 <strong>DASH is Tyler's personal productivity dashboard.</strong> Built with vanilla JavaScript and modern CSS, DASH provides a clean, customizable interface for managing app shortcuts with drag-and-drop functionality. Tyler designed it to be his digital command center, combining organization with inspiration through rotating "fire quotes."
                                 <br><br>
-                                The project showcases his commitment to clean, framework-free development. With 200+ app icons, local storage persistence, and responsive design, DASH demonstrates Tyler's ability to create polished user experiences from scratch. It's his solution to digital clutter and a testament to the power of thoughtful, minimalist design.
+                                Tyler vibe coded this project, using AI assistance to bring his vision to life quickly. With 200+ app icons, local storage persistence, and responsive design, DASH is his solution to digital clutter. Sometimes the best way to build something is to just start coding and see where it takes you.
                             </p>
                         </div>
                         <button class="btn btn--primary" onclick="toggleProjectReadMore('dashFullDescription', this)">Read More</button>
@@ -696,7 +707,6 @@
                             </p>
                         </div>
                         <button class="btn btn--primary" onclick="toggleProjectReadMore('lsbFullDescription', this)">Read More</button>
-                        <a href="https://tmoessing.github.io/life.planner/" target="_blank" class="btn btn--primary">View Current State</a>
                     </div>
                     <img src="resources/lsb.png" alt="Life Scrub Board screenshot" class="project-image">
                 </div>
@@ -751,13 +761,6 @@
                     It's a sweet deal on your monthly bill — definitely worth hopping on.
                 </p>
                 <a href="https://alumni.byu.edu/at-t-discounted-cell-phone-plan" target="_blank" class="btn btn--primary">Learn More</a>
-            </div>
-            <div class="simple-card">
-                <h3 class="project-title">Perplexity - Comet</h3>
-                <p class="project-description">
-                    Perplexity just launched Comet, an AI agent for your browser — and it's insane. Fast, smart, beautifully designed. It's the new new of how we explore the web. Use my invite link below.              
-                </p>
-                <a href="https://perplexity.ai/browser/claim/U4DLBK3QHV" target="_blank" class="btn btn--primary">Check it Out</a>
             </div>
         </div>
     </section>
