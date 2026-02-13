@@ -1,951 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyler Moessing</title>
+    <title>Tyler Moessing - Resume</title>
     <link rel="icon" type="image/png" href="resources/logo.png" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="content-loader.js"></script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.7;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: #1a1a1a;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .sticky-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-            padding: 1rem 2rem;
-            transform: translateY(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 0;
-            margin-bottom: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .sticky-header.show {
-            transform: translateY(0);
-        }
-
-        .sticky-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .sticky-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0;
-            letter-spacing: -0.02em;
-        }
-
-        .sticky-buttons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .sticky-buttons .social-btn {
-            padding: 4px 8px;
-            font-size: 0.7rem;
-        }
-
-        .main-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        .social-btn {
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            font-size: 0.875rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .social-btn:hover::before {
-            left: 100%;
-        }
-
-        .linkedin {
-            background: linear-gradient(135deg, #0077b5, #005885);
-            color: white;
-        }
-
-        .github {
-            background: linear-gradient(135deg, #24292e, #1a1d23);
-            color: white;
-        }
-
-        .facebook {
-            background: linear-gradient(135deg, #4267B2, #365899);
-            color: white;
-        }
-
-        .email {
-            background: linear-gradient(135deg, #ea4335, #c23321);
-            color: white;
-        }
-
-        .donut-btn {
-            position: relative;
-            animation: gentle-bounce 2s ease-in-out infinite;
-        }
-
-        .donut-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        @keyframes gentle-bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
-        }
-
-        .social-btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-        }
-
-        .social-btn:active {
-            transform: translateY(0) scale(0.98);
-        }
-
-        .content-section {
-            background: rgba(255, 255, 255, 0.85);
-            margin: 2rem 0;
-            padding: 2.5rem;
-            border-radius: 24px;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .content-section:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
-            letter-spacing: -0.02em;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 2px;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
-        }
-
-        .about-section {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-section .photo-placeholder {
-            grid-column: 1;
-            grid-row: 1;
-            justify-self: center;
-        }
-
-        .about-section .about-text {
-            grid-column: 2;
-            grid-row: 1;
-        }
-
-        .profile-photo {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .photo-placeholder {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .photo-placeholder:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-
-        .photo-placeholder:hover .profile-photo {
-            border-color: rgba(102, 126, 234, 0.6);
-            box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .about-text h3 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 1rem;
-            letter-spacing: -0.01em;
-        }
-
-        .about-text p {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: #4a4a4a;
-            margin-bottom: 1rem;
-        }
-
-        /* Unified Button System */
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9375rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: 0.75rem;
-            margin-right: 0.5rem;
-            cursor: pointer;
-            box-sizing: border-box;
-            line-height: 1.5;
-            vertical-align: middle;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(0) scale(0.98);
-        }
-
-        .btn--primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .btn--secondary {
-            background: linear-gradient(135deg, #ff6b6b, #ffa500);
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-        }
-
-        .btn--secondary:hover {
-            box-shadow: 0 8px 24px rgba(255, 107, 107, 0.4);
-        }
-
-        .additional-content {
-            display: none;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .additional-content.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .project-short-description {
-            display: block;
-        }
-
-        .project-full-description {
-            display: none;
-        }
-
-        .project-full-description.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 1.75rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 200px;
-            gap: 1.5rem;
-            align-items: start;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            border-color: rgba(255, 255, 255, 0.7);
-        }
-
-        .simple-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 1.75rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .simple-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            border-color: rgba(255, 255, 255, 0.7);
-        }
-
-        .project-image {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 16px;
-            grid-column: 2;
-            grid-row: 1 / -1;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.02);
-        }
-
-        .project-content {
-            grid-column: 1;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        .project-description {
-            color: #4a4a4a;
-            margin-bottom: 1.25rem;
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-
-        @media (max-width: 1024px) {
-            .project-card {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                max-width: 500px;
-            }
-
-            .project-image {
-                grid-column: 1;
-                grid-row: auto;
-                margin: 0 auto;
-                width: 180px;
-                height: 180px;
-            }
-
-            .project-content {
-                grid-column: 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 2.5rem;
-            }
-
-            .social-buttons {
-                flex-direction: row;
-                justify-content: center;
-                gap: 8px;
-                flex-wrap: wrap;
-            }
-
-            .social-btn {
-                font-size: 0.7rem;
-                padding: 5px 10px;
-            }
-
-            .donut-btn {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-                margin-top: 12px;
-            }
-
-            .sticky-content {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .sticky-title {
-                font-size: 1.2rem;
-            }
-
-            .sticky-buttons {
-                gap: 6px;
-            }
-
-            .sticky-buttons .social-btn {
-                padding: 3px 6px;
-                font-size: 0.65rem;
-            }
-
-            .about-section {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto;
-                text-align: center;
-                gap: 30px;
-            }
-
-            .about-section .photo-placeholder {
-                grid-column: 1;
-                grid-row: 1;
-                margin: 0 auto;
-                margin-bottom: 10px;
-            }
-
-            .about-section .about-text {
-                grid-column: 1;
-                grid-row: 2;
-            }
-
-            .profile-photo {
-                width: 150px;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .about-text h3 {
-                font-size: 1.5rem;
-            }
-
-            .about-text p {
-                font-size: 1rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .project-card {
-                max-width: none;
-                margin: 0;
-                padding: 15px;
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .project-image {
-                width: 140px;
-                height: 140px;
-                grid-column: 1;
-                grid-row: auto;
-                margin: 0 auto;
-            }
-
-            .project-content {
-                grid-column: 1;
-            }
-
-            .project-title {
-                font-size: 1.3rem;
-            }
-
-            .project-description {
-                font-size: 0.95rem;
-            }
-
-            .content-section {
-                padding: 20px;
-                margin: 20px 0;
-            }
-
-            .header {
-                padding: 30px 15px;
-            }
-
-            .container {
-                padding: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 2rem;
-            }
-
-            .social-buttons {
-                gap: 6px;
-            }
-
-            .social-btn {
-                font-size: 0.65rem;
-                padding: 4px 8px;
-            }
-
-            .donut-btn {
-                font-size: 0.75rem;
-                padding: 5px 10px;
-            }
-
-            .section-title {
-                font-size: 1.7rem;
-            }
-
-            .about-text h3 {
-                font-size: 1.3rem;
-            }
-
-            .about-text p {
-                font-size: 0.95rem;
-                line-height: 1.6;
-            }
-
-            .about-section {
-                gap: 25px;
-            }
-
-            .about-section .photo-placeholder {
-                margin-bottom: 15px;
-            }
-
-            .project-card {
-                padding: 12px;
-            }
-
-            .project-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            .project-title {
-                font-size: 1.2rem;
-            }
-
-            .project-description {
-                font-size: 0.9rem;
-            }
-
-            .btn {
-                font-size: 0.85rem;
-                padding: 8px 15px;
-            }
-
-            .content-section {
-                padding: 15px;
-                margin: 15px 0;
-            }
-
-            .header {
-                padding: 25px 10px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
 </head>
+
 <body>
-    <div class="container">
-        <header class="header">
-            <h1 class="main-title">Tyler Moessing</h1>
-            
-            <div class="social-buttons">
-                <a href="https://www.linkedin.com/in/tmoessing/" target="_blank" class="social-btn linkedin">LinkedIn</a>
-                <a href="https://github.com/tmoessing" target="_blank" class="social-btn github">GitHub</a>
-                <a href="https://www.facebook.com/tyler.moessing" target="_blank" class="social-btn facebook">Facebook</a>
-                <a href="mailto:tyler@moessing.com" class="social-btn email">Email</a>
+    <div class="resume-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <img src="resources/profile_pic.jpeg" alt="Tyler Moessing" class="profile-photo">
+                <h1 class="profile-name">Tyler Moessing</h1>
+                <p class="profile-title">CS Student @ BYU | ML Enthusiast</p>
             </div>
-        </header>
 
-        <section class="content-section">
-            <h2 class="section-title">About</h2>
-            <div class="about-section">
-                <div class="photo-placeholder">
-                  <img src="resources/profile_pic.jpeg" alt="Tyler Moessing" class="profile-photo">
-                </div>
-                <div class="about-text">
-                    <h3>Learn more about Tyler</h3>
-                    <p>Tyler Moessing is a Computer Science student at Brigham Young University, graduating in April 2027 with an emphasis in Machine Learning and a minor in Statistics. With a 3.98 GPA and multiple academic scholarships, he has distinguished himself through strong coursework in data structures, linear algebra, and advanced software construction, with plans to complete specialized courses in machine learning, AI, and NLP.</p>
-                    
-                    <button class="btn btn--primary" onclick="toggleReadMore()">Read More</button>
-                    
-                    <div class="additional-content" id="additionalContent">
-                        <p>Tyler's technical toolkit spans Python, C/C++, Java, and JavaScript, with practical experience in AWS deployment, Git, and MongoDB. He has applied these skills in diverse roles, including developing Alexa apps with over 10,000 users, fine-tuning YOLOv7 models for real-world vehicle detection at Spot Parking, building analytics pipelines for BYU Basketball, and maintaining web infrastructure at BYU Creative Works. His research at BYU led to a machine learning system classifying figure skating jumps, improving accuracy by 15% and earning him a presentation slot at an international conference in the Netherlands.</p>
-                        
-                        <p>Beyond academics, Tyler has served as a tutor, code instructor, and youth counselor, reflecting his commitment to mentorship and service. He also volunteers as an officer in the Competitive Programming Club, where he helps organize coding competitions and supports peer learning. With projects ranging from battle bots to AI-driven sports analytics, Tyler thrives at the intersection of problem-solving, innovation, and teamwork. Driven, adaptable, and deeply curious, he is building a career that combines technical excellence with creativity and impact.</p>
-                    </div>
-                </div>
+            <nav class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+            </nav>
+
+            <div class="social-links">
+                <a href="mailto:tyler@moessing.com" class="social-link email">Email</a>
+                <a href="https://www.linkedin.com/in/tmoessing/" target="_blank"
+                    class="social-link linkedin">LinkedIn</a>
+                <a href="https://github.com/tmoessing" target="_blank" class="social-link github">GitHub</a>
+                <a href="https://www.facebook.com/tyler.moessing" target="_blank"
+                    class="social-link facebook">Facebook</a>
             </div>
-        </section>
 
-        <!-- <section class="content-section">
-            <h2 class="section-title">Mind Space</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                <blockquote class="project-quote">
-                    "If I were 22 right now and graduating college, I would feel like the luckiest kid in all of history. There's never been a more amazing time to go create something totally new."
-                    <footer>— Sam Altman</footer>
-                </blockquote>
-                <br>
-                <p class="project-description">
-                    He's not wrong. Tyler feels incredibly lucky to be living in a time when AI is evolving. Exciting times are ahead, even with the uncertainty that comes with it.
+            <a href="https://venmo.com/tmoessing" target="_blank" class="donut-btn">Buy me a donut</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- About Section -->
+            <section id="about" class="section">
+                <h2 class="section-title">About</h2>
+                <p class="section-description">
+                    Tyler Moessing is a Computer Science student at Brigham Young University, graduating in April 2027
+                    with an emphasis in Machine Learning and a minor in Statistics. With a 3.98 GPA and multiple
+                    academic scholarships, he has distinguished himself through strong coursework in data structures,
+                    linear algebra, and advanced software construction.
                 </p>
-                </div>
-            </div>
-        </section> -->
-
-
-        <section class="content-section">
-            <h2 class="section-title">Creations</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Jimmy in the House</h3>
-                        <div class="project-short-description">
-                            <p class="project-description">
-                                <strong>Jimmy in the House gives you a daily shower thought.</strong> A high school project that brought daily smiles to 60 recipients through fun daily thoughts.
-                            </p>
-                        </div>
-                        <div class="project-full-description" id="jimmyFullDescription">
-                            <p class="project-description">
-                                <strong>Jimmy in the House gives you a daily shower thought.</strong> In high school, Tyler created a Remind class called <em>"Jimmy in the House"</em> with 60 recipients who got fun thoughts every day. The name came from a fake identity he once used in a group chat with strangers — he called himself "Jimmy," and the name stuck.
-                                <br><br>
-                                His goal was simple: bring a smile to people each day. One recipient even told him, <em>"You are a hoot."</em> Hopefully, his "You Thought of the Day" messages brightened someone's day. The Reminds may have stopped, but this website carries on Jimmy's legacy.
-                            </p>
-                        </div>
-                        <button class="btn btn--primary" onclick="toggleProjectReadMore('jimmyFullDescription', this)">Read More</button>
-                        <a href="https://tmoessing.github.io/jimmy_in_the_house_website/" target="_blank" class="btn btn--primary">View Project</a>
-                    </div>
-                    <img src="resources/jimmy_project.jpg" alt="Jimmy in the House project screenshot" class="project-image">
-                </div>
-
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">DASH</h3>
-                        <div class="project-short-description">
-                            <p class="project-description">
-                                <strong>DASH is Tyler's personal productivity dashboard.</strong> A clean, customizable interface for managing app shortcuts with drag-and-drop functionality.
-                            </p>
-                        </div>
-                        <div class="project-full-description" id="dashFullDescription">
-                            <p class="project-description">
-                                <strong>DASH is Tyler's personal productivity dashboard.</strong> Built with vanilla JavaScript and modern CSS, DASH provides a clean, customizable interface for managing app shortcuts with drag-and-drop functionality. Tyler designed it to be his digital command center, combining organization with inspiration through rotating "fire quotes."
-                                <br><br>
-                                Tyler vibe coded this project, using AI assistance to bring his vision to life quickly. With 200+ app icons, local storage persistence, and responsive design, DASH is his solution to digital clutter. Sometimes the best way to build something is to just start coding and see where it takes you.
-                            </p>
-                        </div>
-                        <button class="btn btn--primary" onclick="toggleProjectReadMore('dashFullDescription', this)">Read More</button>
-                        <a href="https://tmoessing.github.io/DASH/" target="_blank" class="btn btn--primary">View Project</a>
-                    </div>
-                    <img src="resources/DASH.png" alt="DASH dashboard screenshot" class="project-image">
-                </div>
-
-            </div>
-            
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="https://venmo.com/tmoessing" target="_blank" class="btn btn--secondary donut-btn">🍩 Buy a Developer a Donut</a>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2 class="section-title">Currently Working On</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Life Scrum Board</h3>
-                        <div class="project-short-description">
-                            <p class="project-description">
-                                <strong>Life Scrub Board brings Scrum methodologies to personal life management.</strong> A React application that applies agile practices to personal productivity with story management and kanban boards.
-                            </p>
-                        </div>
-                        <div class="project-full-description" id="lsbFullDescription">
-                            <p class="project-description">
-                                <strong>Life Scrub Board brings Scrum methodologies to personal life management.</strong> Tyler built this React application to organize his life using proven agile practices, featuring story management, sprint planning, and kanban boards. It's his solution for applying software development methodologies to personal productivity.
-                                <br><br>
-                                Built with React, TypeScript, and modern web technologies, the project demonstrates Tyler's full-stack capabilities and his innovative approach to problem-solving. With data visualization, backup functionality, and multiple view modes, Life Scrub Board showcases his ability to create sophisticated applications that solve real-world problems.
-                            </p>
-                        </div>
-                        <button class="btn btn--primary" onclick="toggleProjectReadMore('lsbFullDescription', this)">Read More</button>
-                    </div>
-                    <img src="resources/lsb.png" alt="Life Scrub Board screenshot" class="project-image">
-                </div>
-
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Messed up Farm</h3>
-                        <div class="project-short-description">
-                            <p class="project-description">
-                                Tyler is creating a top-down roguelike game in Python featuring farm animals as main characters. A hands-on coding project designed to strengthen problem-solving skills.
-                            </p>
-                        </div>
-                        <div class="project-full-description" id="farmFullDescription">
-                            <p class="project-description">
-                                Tyler is creating a game in Python with one of his close friends. It will be a top-down roguelike game featuring a cow, a pig, and possibly a goat as the main characters. The two are choosing to code everything by hand rather than rely on vibe coding with AI, since they wanted the project to challenge them, strengthen their problem-solving skills, and help them truly learn the tools of development.
-                                <br><br>
-                                This hands-on approach means the project will take longer to finish, but it also makes the process itself valuable. Once completed, it promises to be a unique and entertaining gaming experience. The project will probably take 2 years because they are working in school and are busy with other things.
-                            </p>
-                        </div>
-                        <button class="btn btn--primary" onclick="toggleProjectReadMore('farmFullDescription', this)">Read More</button>
-                        <p style="color: #666; font-style: italic; margin-top: 15px;">In Development</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="content-section">
-        <h2 class="section-title">Helpful Links</h2>
-        <div class="projects-grid">
-            <div class="simple-card">
-                <h3 class="project-title">Do Not Call Registry</h3>
-                <p class="project-description">
-                    Tired of spam calls? Add your number to the official <em>Do Not Call</em> list. 
-                    It won't block every scammer, but it cuts down on a ton of junk.
-                </p>
-                <a href="https://www.donotcall.gov/" target="_blank" class="btn btn--primary">Visit Site</a>
-            </div>
-
-            <div class="simple-card">
-                <h3 class="project-title">Opt-Out Prescreen</h3>
-                <p class="project-description">
-                    Want fewer credit card offers in the mail? This site lets you opt-out of prescreened 
-                    credit and insurance offers. Save your mailbox (and a few trees).
-                </p>
-                <a href="https://www.optoutprescreen.com/" target="_blank" class="btn btn--primary">Visit Site</a>
-            </div>
-
-            <div class="simple-card">
-                <h3 class="project-title">BYU Alumni AT&T Plan</h3>
-                <p class="project-description">
-                    If you ever attended at least one semester at BYU, you qualify for the 
-                    <strong>AT&T Alumni Discounted Cell Phone Plan</strong>. 
-                    It's a sweet deal on your monthly bill — definitely worth hopping on.
-                </p>
-                <a href="https://alumni.byu.edu/at-t-discounted-cell-phone-plan" target="_blank" class="btn btn--primary">Learn More</a>
-            </div>
-        </div>
-    </section>
-            
-    <section class="content-section">
-            <h2 class="section-title">Great Books</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3 class="project-title">Essentialism: The Disciplined Pursuit of Less</h3>
-                    <p class="project-description">
-                        Tyler recently finished reading <strong>Essentialism: The Disciplined Pursuit of Less</strong> and highly recommends it. He says the book helped him understand how to put his priorities first and focus on what truly matters.
+                <div class="additional-content" id="aboutAdditional">
+                    <p class="section-description">
+                        Tyler's technical toolkit spans Python, C/C++, Java, and JavaScript, with practical experience
+                        in AWS deployment, Git, and MongoDB. He thrives at the intersection of problem-solving,
+                        innovation, and teamwork. Driven, adaptable, and deeply curious, he is building a career that
+                        combines technical excellence with creativity and impact.
                     </p>
                 </div>
-            </div>
-    </section>
+                <button class="btn btn-secondary" onclick="toggleAbout()">Read More</button>
+            </section>
 
-    </div>
+            <!-- Experience Section -->
+            <section id="experience" class="section">
+                <h2 class="section-title">Experience</h2>
 
-    <!-- Sticky Header -->
-    <div class="sticky-header" id="stickyHeader">
-        <div class="sticky-content">
-            <h1 class="sticky-title">Tyler Moessing</h1>
-            <div class="sticky-buttons">
-                <a href="https://www.linkedin.com/in/tmoessing/" target="_blank" class="social-btn linkedin">LinkedIn</a>
-                <a href="https://github.com/tmoessing" target="_blank" class="social-btn github">GitHub</a>
-                <a href="https://www.facebook.com/tyler.moessing" target="_blank" class="social-btn facebook">Facebook</a>
-                <a href="mailto:tyler@moessing.com" class="social-btn email">Email</a>
-            </div>
-        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Basketball Analytics Developer</h3>
+                            <p class="card-subtitle">BYU Basketball</p>
+                        </div>
+                        <div class="card-meta">2023 - Present</div>
+                    </div>
+                    <p class="card-description">
+                        Building analytics pipelines and data visualization tools for the BYU Basketball program.
+                        Developed automated systems for tracking player performance and game statistics.
+                    </p>
+                    <div class="card-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Visualization</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Machine Learning Intern</h3>
+                            <p class="card-subtitle">Spot Parking</p>
+                        </div>
+                        <div class="card-meta">2023</div>
+                    </div>
+                    <p class="card-description">
+                        Fine-tuned YOLOv7 models for real-world vehicle detection. Improved detection accuracy and
+                        optimized model performance for deployment on edge devices.
+                    </p>
+                    <div class="card-tags">
+                        <span class="skill-tag">YOLOv7</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">PyTorch</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Web Developer</h3>
+                            <p class="card-subtitle">BYU Creative Works</p>
+                        </div>
+                        <div class="card-meta">2022 - 2023</div>
+                    </div>
+                    <p class="card-description">
+                        Maintained web infrastructure and developed features for university websites. Collaborated with
+                        designers and content creators to deliver engaging web experiences.
+                    </p>
+                    <div class="card-tags">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Web Development</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Alexa Skills Developer</h3>
+                            <p class="card-subtitle">Independent</p>
+                        </div>
+                        <div class="card-meta">2019 - 2021</div>
+                    </div>
+                    <p class="card-description">
+                        Developed Alexa apps with over 10,000 users. Created voice-driven experiences focusing on user
+                        engagement and natural language interaction.
+                    </p>
+                    <div class="card-tags">
+                        <span class="skill-tag">Alexa Skills Kit</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">AWS Lambda</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="section">
+                <h2 class="section-title">Education</h2>
+
+                <div class="education-card">
+                    <div class="education-header">
+                        <h3 class="degree-title">Bachelor of Science in Computer Science</h3>
+                        <p class="university">Brigham Young University</p>
+                        <p class="education-meta">Graduating April 2027 | GPA: 3.98</p>
+                    </div>
+                    <div class="education-details">
+                        <p><strong>Emphasis:</strong> Machine Learning</p>
+                        <p><strong>Minor:</strong> Statistics</p>
+                        <p><strong>Honors:</strong> Multiple academic scholarships</p>
+                        <p><strong>Key Coursework:</strong></p>
+                        <ul>
+                            <li>Data Structures & Algorithms</li>
+                            <li>Linear Algebra</li>
+                            <li>Advanced Software Construction</li>
+                            <li>Machine Learning (Planned)</li>
+                            <li>Artificial Intelligence (Planned)</li>
+                            <li>Natural Language Processing (Planned)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Research: Figure Skating Jump Classification</h3>
+                            <p class="card-subtitle">BYU Research Project</p>
+                        </div>
+                        <div class="card-meta">2023</div>
+                    </div>
+                    <p class="card-description">
+                        Developed a machine learning system for classifying figure skating jumps, improving accuracy by
+                        15%. Presented research at an international conference in the Netherlands.
+                    </p>
+                    <div class="card-tags">
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">Research</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="section">
+                <h2 class="section-title">Projects</h2>
+
+                <div class="project-card">
+                    <img src="resources/jimmy_project.jpg" alt="Jimmy in the House" class="project-image">
+                    <div class="project-card-content">
+                        <h3 class="card-title">Jimmy in the House</h3>
+                        <p class="card-description">
+                            A high school project that brought daily smiles to 60 recipients through fun daily thoughts.
+                            Created a Remind class to deliver "You Thought of the Day" messages, brightening people's
+                            days one thought at a time.
+                        </p>
+                        <div class="project-actions">
+                            <a href="https://tmoessing.github.io/jimmy_in_the_house_website/" target="_blank"
+                                class="btn btn-primary">View Project →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="resources/lsb.png" alt="Life Scrum Board" class="project-image">
+                    <div class="project-card-content">
+                        <h3 class="card-title">Life Scrum Board</h3>
+                        <p class="card-description">
+                            A React application that applies agile practices to personal productivity. Features story
+                            management, sprint planning, and kanban boards. Built with React, TypeScript, and modern web
+                            technologies.
+                        </p>
+                        <div class="card-tags">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">Agile</span>
+                        </div>
+                        <div class="project-actions">
+                            <p style="color: var(--text-muted); font-style: italic; margin-top: 12px;">In Development
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Messed up Farm</h3>
+                    <p class="card-description">
+                        A top-down roguelike game in Python featuring farm animals as main characters. Co-created with a
+                        close friend, coding everything by hand to strengthen problem-solving skills and truly learn the
+                        tools of development.
+                    </p>
+                    <div class="card-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Game Development</span>
+                        <span class="skill-tag">Pygame</span>
+                    </div>
+                    <p style="color: var(--text-muted); font-style: italic; margin-top: 12px;">In Development (Est. 2
+                        years)</p>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="section">
+                <h2 class="section-title">Skills</h2>
+
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Languages</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">Python</div>
+                            <div class="skill-item">C/C++</div>
+                            <div class="skill-item">Java</div>
+                            <div class="skill-item">JavaScript</div>
+                            <div class="skill-item">TypeScript</div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Frameworks & Libraries</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">React</div>
+                            <div class="skill-item">Node.js</div>
+                            <div class="skill-item">PyTorch</div>
+                            <div class="skill-item">YOLOv7</div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Tools & Technologies</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">Git</div>
+                            <div class="skill-item">AWS</div>
+                            <div class="skill-item">MongoDB</div>
+                            <div class="skill-item">Docker</div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Specializations</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">Machine Learning</div>
+                            <div class="skill-item">Computer Vision</div>
+                            <div class="skill-item">Data Analysis</div>
+                            <div class="skill-item">Web Development</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interests Section -->
+            <section id="interests" class="section">
+                <h2 class="section-title">Interests & Community</h2>
+
+                <div class="card">
+                    <h3 class="card-title">Competitive Programming Club Officer</h3>
+                    <p class="card-description">
+                        Volunteers as an officer in the Competitive Programming Club, helping organize coding
+                        competitions and supporting peer learning.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Current Reading</h3>
+                    <p class="card-description">
+                        <strong>Essentialism: The Disciplined Pursuit of Less</strong> - A book that helped Tyler
+                        understand how to put his priorities first and focus on what truly matters.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Helpful Resources</h3>
+                    <p class="card-description" style="margin-bottom: 8px;">Tyler recommends these useful services:</p>
+                    <div class="project-actions">
+                        <a href="https://www.donotcall.gov/" target="_blank" class="btn btn-secondary">Do Not Call
+                            Registry</a>
+                        <a href="https://www.optoutprescreen.com/" target="_blank" class="btn btn-secondary">Opt-Out
+                            Prescreen</a>
+                        <a href="https://alumni.byu.edu/at-t-discounted-cell-phone-plan" target="_blank"
+                            class="btn btn-secondary">BYU AT&T Plan</a>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script>
-        function toggleReadMore() {
-            const additionalContent = document.getElementById('additionalContent');
-            const button = document.querySelector('.about-section .btn--primary');
-            
-            if (additionalContent.classList.contains('show')) {
-                additionalContent.classList.remove('show');
+        function toggleAbout() {
+            const content = document.getElementById('aboutAdditional');
+            const button = event.target;
+
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
                 button.textContent = 'Read More';
             } else {
-                additionalContent.classList.add('show');
+                content.classList.add('show');
                 button.textContent = 'Read Less';
             }
         }
 
-        function toggleProjectReadMore(fullDescriptionId, button) {
-            const fullDescription = document.getElementById(fullDescriptionId);
-            const shortDescription = fullDescription.previousElementSibling;
-            
-            if (fullDescription.classList.contains('show')) {
-                fullDescription.classList.remove('show');
-                shortDescription.style.display = 'block';
-                button.textContent = 'Read More';
-            } else {
-                fullDescription.classList.add('show');
-                shortDescription.style.display = 'none';
-                button.textContent = 'Read Less';
-            }
-        }
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
 
-        // Sticky header functionality
-        window.addEventListener('scroll', function() {
-            const stickyHeader = document.getElementById('stickyHeader');
-            const originalHeader = document.querySelector('.header');
-            const headerBottom = originalHeader.offsetTop + originalHeader.offsetHeight;
-            
-            if (window.scrollY > headerBottom) {
-                stickyHeader.classList.add('show');
-            } else {
-                stickyHeader.classList.remove('show');
-            }
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Highlight active section on scroll
+        window.addEventListener('scroll', function () {
+            let current = '';
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
+
 </html>
