@@ -21,55 +21,44 @@ class ContentLoader {
         let currentSubsection = null;
         let currentItem = {};
 
+        const saveCurrentItem = () => {
+            if (currentSection && currentSubsection && Object.keys(currentItem).length > 0) {
+                if (Array.isArray(this.content[currentSection])) {
+                    this.content[currentSection].push({ ...currentItem, title: currentSubsection });
+                } else {
+                    this.content[currentSection][currentSubsection] = { ...currentItem };
+                }
+            }
+            currentItem = {};
+        };
+
         for (let line of lines) {
-            line = line.trim();
+            const trimmedLine = line.trim();
+            if (!trimmedLine) continue;
 
             // Main section headers (## Section)
-            if (line.startsWith('## ') && !line.startsWith('### ')) {
-                currentSection = line.replace('## ', '').toLowerCase();
+            if (trimmedLine.startsWith('## ') && !trimmedLine.startsWith('### ')) {
+                saveCurrentItem();
+                currentSection = trimmedLine.replace('## ', '').toLowerCase();
                 if (!this.content[currentSection]) {
-                    this.content[currentSection] = currentSection === 'experience' ||
-                        currentSection === 'projects' ||
-                        currentSection === 'interests' ? [] : {};
+                    this.content[currentSection] = ['experience', 'projects', 'interests'].includes(currentSection) ? [] : {};
                 }
                 currentSubsection = null;
-                currentItem = {};
                 continue;
             }
 
             // Subsection headers (### Subsection)
-            if (line.startsWith('### ')) {
-                // Save previous item if exists
-                if (currentSubsection && Object.keys(currentItem).length > 0) {
-                    if (Array.isArray(this.content[currentSection])) {
-                        this.content[currentSection].push({ ...currentItem, title: currentSubsection });
-                    } else {
-                        this.content[currentSection][currentSubsection] = { ...currentItem };
-                    }
-                }
-
-                currentSubsection = line.replace('### ', '');
-                currentItem = {};
+            if (trimmedLine.startsWith('### ')) {
+                saveCurrentItem();
+                currentSubsection = trimmedLine.replace('### ', '');
                 continue;
             }
 
-            // Key-value pairs (key: value)
-            if (line.includes(':') && currentSection) {
-                const colonIndex = line.indexOf(':');
-                const key = line.substring(0, colonIndex).trim();
-                const value = line.substring(colonIndex + 1).trim();
+            if (!currentSection) continue;
 
-                if (currentSubsection) {
-                    currentItem[key] = value;
-                } else {
-                    this.content[currentSection][key] = value;
-                }
-                continue;
-            }
-
-            // List items
-            if (line.startsWith('- ') && currentSection === 'interests') {
-                const parts = line.substring(2).split('|');
+            // List items for resources
+            if (trimmedLine.startsWith('- ') && currentSection === 'interests') {
+                const parts = trimmedLine.substring(2).split('|');
                 if (parts.length === 2) {
                     if (!this.content[currentSection].resources) {
                         this.content[currentSection].resources = [];
@@ -79,17 +68,42 @@ class ContentLoader {
                         url: parts[1].trim()
                     });
                 }
+                continue;
+            }
+
+            // Key-value pairs (key: value)
+            const colonIndex = trimmedLine.indexOf(':');
+            if (colonIndex > 0 && colonIndex < 30 && !trimmedLine.startsWith('- ')) {
+                const key = trimmedLine.substring(0, colonIndex).trim().toLowerCase();
+                const value = trimmedLine.substring(colonIndex + 1).trim();
+
+                if (currentSubsection) {
+                    currentItem[key] = value;
+                } else {
+                    this.content[currentSection][key] = value;
+                }
+            } else {
+                // Handle text directly under a section or subsection
+                const text = trimmedLine;
+                if (currentSubsection) {
+                    if (!currentItem.description) {
+                        currentItem.description = text;
+                    } else {
+                        currentItem.description += ' ' + text;
+                    }
+                } else {
+                    // Text directly under a section (like About)
+                    if (!this.content[currentSection].mainText) {
+                        this.content[currentSection].mainText = text;
+                    } else {
+                        this.content[currentSection].mainText += ' ' + text;
+                    }
+                }
             }
         }
 
         // Save last item
-        if (currentSubsection && Object.keys(currentItem).length > 0) {
-            if (Array.isArray(this.content[currentSection])) {
-                this.content[currentSection].push({ ...currentItem, title: currentSubsection });
-            } else {
-                this.content[currentSection][currentSubsection] = { ...currentItem };
-            }
-        }
+        saveCurrentItem();
     }
 
     populatePage() {
@@ -100,93 +114,110 @@ class ContentLoader {
             this.setAttr('.profile-photo', 'src', this.content.profile.photo);
         }
 
-        // Contact
+        // Contact & Social Links
         if (this.content.contact) {
-            this.setAttr('a.email', 'href', `mailto:${this.content.contact.email}`);
-            this.setAttr('a.linkedin', 'href', this.content.contact.linkedin);
-            this.setAttr('a.github', 'href', this.content.contact.github);
-            this.setAttr('a.facebook', 'href', this.content.contact.facebook);
-            this.setAttr('.donut-btn', 'href', this.content.contact.venmo);
+            const socialLinks = {
+                email: this.content.contact.email ? `mailto:${this.content.contact.email}` : null,
+                linkedin: this.content.contact.linkedin,
+                github: this.content.contact.github,
+                kaggle: this.content.contact.kaggle,
+                leetcode: this.content.contact.leetcode,
+                facebook: this.content.contact.facebook
+            };
+
+            Object.entries(socialLinks).forEach(([key, value]) => {
+                const el = document.querySelector(`.social-link.${key}`);
+                if (el && value && !value.includes('undefined')) {
+                    el.setAttribute('href', value);
+                    el.style.display = 'flex';
+                }
+            });
+
+            // Handle Venmo button
+            const venmoBtn = document.querySelector('.venmo-btn');
+            if (venmoBtn && this.content.contact.venmo) {
+                venmoBtn.setAttribute('href', this.content.contact.venmo);
+                venmoBtn.style.display = 'inline-flex';
+            }
         }
 
         // About
         if (this.content.about) {
-            const aboutText = Object.keys(this.content.about)
-                .filter(key => key !== 'Extended')
-                .map(key => this.content.about[key])
-                .join('\n\n');
-            this.setHTML('#about .section-description', aboutText);
+            if (this.content.about.mainText) {
+                this.setHTML('#about .section-description', this.content.about.mainText);
+            }
 
-            if (this.content.about.Extended) {
-                this.setHTML('#aboutAdditional .section-description', this.content.about.Extended);
+            // Extended content check
+            const extendedKey = Object.keys(this.content.about).find(k => k.toLowerCase() === 'extended');
+            if (extendedKey) {
+                const extended = this.content.about[extendedKey];
+                const extendedContent = typeof extended === 'string' ? extended : (extended.description || '');
+                this.setHTML('#aboutAdditional .section-description', extendedContent);
+                const readMoreBtn = document.querySelector('#about .btn-secondary');
+                if (readMoreBtn) readMoreBtn.style.display = 'inline-block';
             }
         }
 
         // Experience
         if (this.content.experience && Array.isArray(this.content.experience)) {
-            const container = document.querySelector('#experience');
-            const existingCards = container.querySelectorAll('.card');
-            existingCards.forEach(card => card.remove());
-
-            this.content.experience.forEach(exp => {
-                const card = this.createExperienceCard(exp);
-                container.appendChild(card);
-            });
+            const container = document.querySelector('#experience-container');
+            if (container) {
+                container.innerHTML = '';
+                this.content.experience.forEach(exp => {
+                    container.appendChild(this.createExperienceCard(exp));
+                });
+            }
         }
 
         // Education
         if (this.content.education) {
-            const educationSection = document.querySelector('#education');
-            const cards = educationSection.querySelectorAll('.education-card, .card');
-            cards.forEach(card => card.remove());
-
-            Object.keys(this.content.education).forEach(key => {
-                const edu = this.content.education[key];
-                const card = key.includes('Research') ?
-                    this.createResearchCard({ ...edu, title: key }) :
-                    this.createEducationCard({ ...edu, degree: key });
-                educationSection.appendChild(card);
-            });
+            const container = document.querySelector('#education-container');
+            if (container) {
+                container.innerHTML = '';
+                Object.keys(this.content.education).forEach(key => {
+                    const edu = this.content.education[key];
+                    const card = key.toLowerCase().includes('research') ?
+                        this.createResearchCard({ ...edu, title: key }) :
+                        this.createEducationCard({ ...edu, degree: key });
+                    container.appendChild(card);
+                });
+            }
         }
 
         // Projects
         if (this.content.projects && Array.isArray(this.content.projects)) {
-            const container = document.querySelector('#projects');
-            const existingCards = container.querySelectorAll('.project-card, .card');
-            existingCards.forEach(card => card.remove());
-
-            this.content.projects.forEach(project => {
-                const card = this.createProjectCard(project);
-                container.appendChild(card);
-            });
+            const container = document.querySelector('#projects-container');
+            if (container) {
+                container.innerHTML = '';
+                this.content.projects.forEach(project => {
+                    container.appendChild(this.createProjectCard(project));
+                });
+            }
         }
 
         // Skills
         if (this.content.skills) {
             const container = document.querySelector('.skills-grid');
-            container.innerHTML = '';
-
-            Object.keys(this.content.skills).forEach(category => {
-                const skillDiv = this.createSkillCategory(category, this.content.skills[category]);
-                container.appendChild(skillDiv);
-            });
+            if (container) {
+                container.innerHTML = '';
+                Object.keys(this.content.skills).forEach(category => {
+                    container.appendChild(this.createSkillCategory(category, this.content.skills[category]));
+                });
+            }
         }
 
         // Interests
         if (this.content.interests) {
-            const container = document.querySelector('#interests');
-            const existingCards = container.querySelectorAll('.card');
-            existingCards.forEach(card => card.remove());
+            const container = document.querySelector('#interests-container');
+            if (container) {
+                container.innerHTML = '';
+                this.content.interests.forEach(interest => {
+                    container.appendChild(this.createInterestCard(interest));
+                });
 
-            this.content.interests.forEach(interest => {
-                const card = this.createInterestCard(interest);
-                container.appendChild(card);
-            });
-
-            // Add resources card if exists
-            if (this.content.interests.resources) {
-                const resourceCard = this.createResourceCard(this.content.interests.resources);
-                container.appendChild(resourceCard);
+                if (this.content.interests.resources) {
+                    container.appendChild(this.createResourceCard(this.content.interests.resources));
+                }
             }
         }
     }
@@ -198,11 +229,11 @@ class ContentLoader {
             <div class="card-header">
                 <div>
                     <h3 class="card-title">${exp.title}</h3>
-                    <p class="card-subtitle">${exp.company}</p>
+                    <p class="card-subtitle">${exp.company || ''}</p>
                 </div>
-                <div class="card-meta">${exp.dates}</div>
+                <div class="card-meta">${exp.dates || ''}</div>
             </div>
-            <p class="card-description">${exp.description}</p>
+            <p class="card-description">${exp.description || ''}</p>
             ${exp.tags ? `<div class="card-tags">${exp.tags.split(',').map(tag =>
             `<span class="skill-tag">${tag.trim()}</span>`).join('')}</div>` : ''}
         `;
@@ -216,8 +247,8 @@ class ContentLoader {
         card.innerHTML = `
             <div class="education-header">
                 <h3 class="degree-title">${edu.degree}</h3>
-                <p class="university">${edu.institution}</p>
-                <p class="education-meta">Graduating ${edu.graduation} | GPA: ${edu.gpa}</p>
+                <p class="university">${edu.institution || ''}</p>
+                <p class="education-meta">Graduating ${edu.graduation || ''} | GPA: ${edu.gpa || ''}</p>
             </div>
             <div class="education-details">
                 ${edu.emphasis ? `<p><strong>Emphasis:</strong> ${edu.emphasis}</p>` : ''}
@@ -239,11 +270,11 @@ class ContentLoader {
             <div class="card-header">
                 <div>
                     <h3 class="card-title">${research.title}</h3>
-                    <p class="card-subtitle">${research.institution}</p>
+                    <p class="card-subtitle">${research.institution || ''}</p>
                 </div>
-                <div class="card-meta">${research.dates}</div>
+                <div class="card-meta">${research.dates || ''}</div>
             </div>
-            <p class="card-description">${research.description}</p>
+            <p class="card-description">${research.description || ''}</p>
             ${research.tags ? `<div class="card-tags">${research.tags.split(',').map(tag =>
             `<span class="skill-tag">${tag.trim()}</span>`).join('')}</div>` : ''}
         `;
@@ -256,15 +287,21 @@ class ContentLoader {
         card.className = hasImage ? 'project-card' : 'card';
 
         let statusHTML = '';
-        if (project.status === 'in-development') {
-            statusHTML = `<p style="color: var(--text-muted); font-style: italic; margin-top: 12px;">In Development${project.note ? ` (${project.note})` : ''}</p>`;
+        if (project.status) {
+            const statusText = project.status === 'in-development' ? 'In Development' : 
+                             project.status === 'personal-use' || project.status === 'personal use' ? 'Personal Use' :
+                             project.status.charAt(0).toUpperCase() + project.status.slice(1);
+            
+            if (project.status.toLowerCase() !== 'live') {
+                statusHTML = `<p style="color: var(--text-muted); font-style: italic; margin-top: 12px;">${statusText}${project.note ? ` (${project.note})` : ''}</p>`;
+            }
         }
 
         card.innerHTML = hasImage ? `
             <img src="${project.image}" alt="${project.title}" class="project-image">
             <div class="project-card-content">
                 <h3 class="card-title">${project.title}</h3>
-                <p class="card-description">${project.description}</p>
+                <p class="card-description">${project.description || ''}</p>
                 ${project.tags ? `<div class="card-tags">${project.tags.split(',').map(tag =>
             `<span class="skill-tag">${tag.trim()}</span>`).join('')}</div>` : ''}
                 <div class="project-actions">
@@ -274,7 +311,7 @@ class ContentLoader {
             </div>
         ` : `
             <h3 class="card-title">${project.title}</h3>
-            <p class="card-description">${project.description}</p>
+            <p class="card-description">${project.description || ''}</p>
             ${project.tags ? `<div class="card-tags">${project.tags.split(',').map(tag =>
                 `<span class="skill-tag">${tag.trim()}</span>`).join('')}</div>` : ''}
             ${statusHTML}
@@ -282,10 +319,11 @@ class ContentLoader {
         return card;
     }
 
-    createSkillCategory(category, skills) {
+    createSkillCategory(category, skillData) {
         const div = document.createElement('div');
         div.className = 'skill-category';
-        const skillList = skills.split(',').map(s => s.trim());
+        const rawSkills = typeof skillData === 'string' ? skillData : (skillData.description || '');
+        const skillList = rawSkills.split(',').map(s => s.trim()).filter(s => s);
         div.innerHTML = `
             <h3 class="skill-category-title">${category}</h3>
             <div class="skill-list">
@@ -299,8 +337,8 @@ class ContentLoader {
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
-            <h3 class="card-title">${interest.title || interest.description?.split(':')[0]}</h3>
-            <p class="card-description">${interest.description}</p>
+            <h3 class="card-title">${interest.title || ''}</h3>
+            ${interest.description ? `<p class="card-description">${interest.description}</p>` : ''}
         `;
         return card;
     }
@@ -310,8 +348,7 @@ class ContentLoader {
         card.className = 'card';
         card.innerHTML = `
             <h3 class="card-title">Helpful Resources</h3>
-            <p class="card-description" style="margin-bottom: 8px;">Tyler recommends these useful services:</p>
-            <div class="project-actions">
+            <div class="project-actions" style="margin-top: var(--spacing-md);">
                 ${resources.map(r => `<a href="${r.url}" target="_blank" class="btn btn-secondary">${r.name}</a>`).join('')}
             </div>
         `;

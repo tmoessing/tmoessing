@@ -72,13 +72,13 @@ body {
   width: var(--sidebar-width);
   background: var(--card-bg);
   border-right: 1px solid var(--border-color);
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
   position: fixed;
   height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
 }
 
 .sidebar-profile {
@@ -86,12 +86,12 @@ body {
 }
 
 .profile-photo {
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--border-color);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   transition: all 0.3s ease;
 }
 
@@ -101,15 +101,15 @@ body {
 }
 
 .profile-name {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 2px;
   letter-spacing: -0.02em;
 }
 
 .profile-title {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -118,15 +118,15 @@ body {
 .nav-links {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 2px;
 }
 
 .nav-link {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 6px var(--spacing-md);
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: var(--radius-md);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   transition: all 0.2s ease;
   display: flex;
@@ -144,18 +144,39 @@ body {
   color: var(--primary-blue);
 }
 
+.icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.icon-stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-fill {
+  fill: currentColor;
+}
+
 /* Social Links */
 .social-links {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 4px;
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color-light);
 }
 
 .social-link {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 6px var(--spacing-md);
   text-decoration: none;
   border-radius: var(--radius-md);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   transition: all 0.2s ease;
   display: flex;
@@ -163,7 +184,7 @@ body {
   gap: var(--spacing-sm);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .social-link:hover {
@@ -175,32 +196,77 @@ body {
 
 .social-link.linkedin { border-color: #0077b5; color: #0077b5; }
 .social-link.github { border-color: #24292e; color: #24292e; }
+.social-link.kaggle { border-color: #20beff; color: #20beff; }
+.social-link.leetcode { border-color: #ffa116; color: #ffa116; }
 .social-link.facebook { border-color: #4267B2; color: #4267B2; }
+.social-link.venmo { border-color: #3D95CE; color: #3D95CE; }
 .social-link.email { border-color: var(--primary-blue); color: var(--primary-blue); }
 
 .social-link.linkedin:hover { background: rgba(0, 119, 181, 0.05); }
 .social-link.github:hover { background: rgba(36, 41, 46, 0.05); }
+.social-link.kaggle:hover { background: rgba(32, 190, 255, 0.05); }
+.social-link.leetcode:hover { background: rgba(255, 161, 22, 0.05); }
 .social-link.facebook:hover { background: rgba(66, 103, 178, 0.05); }
+.social-link.venmo:hover { background: rgba(61, 149, 206, 0.05); }
 .social-link.email:hover { background: rgba(37, 99, 235, 0.05); }
 
-/* Donut Button */
-.donut-btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-  color: white;
+/* Support Callout */
+.support-callout {
+  margin-top: var(--spacing-3xl);
+  padding: var(--spacing-xl);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  border: 1px dashed var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.support-callout:hover {
+  background: var(--bg-primary);
+  border-color: var(--primary-blue-light);
+  box-shadow: var(--shadow-md);
+}
+
+.support-text {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+}
+
+/* Venmo Button */
+.venmo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0.625rem var(--spacing-lg);
+  background: #ffffff;
+  color: var(--text-primary);
   text-decoration: none;
   border-radius: var(--radius-full);
   font-size: 0.875rem;
   font-weight: 600;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-md);
-  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
 }
 
-.donut-btn:hover {
+.venmo-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.venmo-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
+  border-color: #008CFF;
+  color: #008CFF;
+}
+
+.venmo-btn:hover .venmo-icon {
+  transform: scale(1.1);
 }
 
 /* Main Content */
@@ -220,11 +286,68 @@ body {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 0;
   letter-spacing: -0.02em;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+}
+
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+.projects-layout {
+  display: flex;
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
+.projects-container {
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing */
+}
+
+.projects-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--spacing-lg);
+}
+
+.support-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.support-card:hover {
+  border-color: var(--primary-blue-light);
+  box-shadow: var(--shadow-md);
+}
+
+.support-card .venmo-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--spacing-md);
+}
+
+@media (max-width: 992px) {
+  .projects-layout {
+    flex-direction: column;
+  }
+  
+  .projects-sidebar {
+    width: 100%;
+    position: static;
+  }
 }
 
 .section-title::before {
