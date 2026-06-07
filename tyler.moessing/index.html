@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyler Moessing - Resume</title>
+    <title>Tyler Moessing - Professional</title>
     <link rel="icon" type="image/svg+xml" href="resources/logo.svg" />
-    <link rel="stylesheet" href="styles.css">
-    <script src="content-loader.js"></script>
+    <link rel="stylesheet" href="styles.css?v=3.3">
+    <script src="content-loader.js?v=3.3"></script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -16,129 +16,450 @@
 <body>
     <div class="resume-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-profile">
-                <img src="" alt="Tyler Moessing" class="profile-photo">
-                <h1 class="profile-name"></h1>
-                <p class="profile-title"></p>
+                <div class="sidebar-top-row">
+                    <div class="sidebar-profile-content">
+                        <img src="" alt="Tyler Moessing" class="profile-photo">
+                        <div>
+                            <h1 class="profile-name"></h1>
+                            <p class="profile-title"></p>
+                        </div>
+                    </div>
+                    
+                    <button class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                <div class="mobile-core-links">
+                    <a href="#" class="mobile-action-link resume-link resume-view" title="View Resume">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                        Resume
+                    </a>
+                    <a href="#" class="mobile-action-link email" title="Email">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 3v18h24V3H0zm21.518 2L12 12.713 2.482 5h19.036zM2 19V6.183l10 8.116 10-8.116V19H2z"/></svg>
+                        Email
+                    </a>
+                    <a href="#" class="mobile-action-link linkedin" target="_blank" title="LinkedIn">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
             </div>
 
             <nav class="nav-links">
-                <a href="#about" class="nav-link">
+                <div class="toggle-container">
+                    <div class="toggle-slider"></div>
+                    <button onclick="switchView('resume')" class="toggle-btn active" id="btn-resume">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A4.833 4.833 0 0 1 18 9v12m-12 0V9a4.833 4.833 0 0 1-1.5 1.332V21M3 21h18M3 9v12m0-12a4.833 4.833 0 0 1 1.5-1.332V9A4.833 4.833 0 0 1 3 9Z" /></svg>
+                        Professional
+                    </button>
+                    <button onclick="switchView('library')" class="toggle-btn" id="btn-library">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" /></svg>
+                        Personal
+                    </button>
+                </div>
+                
+                <div id="sidebar-search-container" class="professional-only-nav" style="display: flex; gap: 3px; margin: 8px 0; width: 100%;">
+                    <a href="#/professional" id="btn-outline-nav" class="btn-outline sidebar-btn outline-nav" style="flex: 1; padding: 6px 2px;" onclick="event.preventDefault(); switchView('resume');">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" /></svg>
+                        Outline
+                    </a>
+                    <a href="#/professional/search" class="btn-outline sidebar-btn search-nav" style="flex: 1; padding: 6px 2px;" onclick="event.preventDefault(); switchView('search');">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                        Search
+                    </a>
+                    <a href="#/professional/ai" class="btn-outline sidebar-btn ai-nav disabled" style="flex: 1; padding: 6px 2px;" onclick="event.preventDefault();" title="Coming Soon">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                        AI
+                    </a>
+                </div>
+
+                <div class="nav-separator professional-only-nav"></div>
+                <div class="sidebar-link-header">Sections</div>
+
+                <a href="#about" class="nav-link resume-nav">
                     <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
                     About
                 </a>
-                <a href="#experience" class="nav-link">
+                <a href="#experience" class="nav-link resume-nav">
                     <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.25 14.15v4.25c0 .621-.504 1.125-1.125 1.125H4.875c-.621 0-1.125-.504-1.125-1.125v-4.25m16.5 0a2.25 2.25 0 0 0-2.25-2.25H5.25a2.25 2.25 0 0 0-2.25 2.25m16.5 0V9.45c0-.621-.504-1.125-1.125-1.125h-13.5c-.621 0-1.125.504-1.125 1.125v4.7m16.5 0h-16.5m16.5 0h-16.5m16.5 0h-16.5M10.5 8.25V4.875c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V8.25" /></svg>
                     Experience
                 </a>
-                <a href="#education" class="nav-link">
-                    <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.26 10.147L12 14.64l7.74-4.493a4.5 4.5 0 0 1 4.5 0l.26.151a.75.75 0 0 1 0 1.299l-12 6.975a.75.75 0 0 1-.75 0l-12-6.975a.75.75 0 0 1 0-1.299l.26-.151a4.5 4.5 0 0 1 4.5 0Z" /><path d="M4.5 16.5v1.875a1.125 1.125 0 0 0 1.125 1.125h12.75A1.125 1.125 0 0 0 19.5 18.375V16.5M12 3v1.5m0 9V18m-3-5.25h6" /></svg>
-                    Education
-                </a>
-                <a href="#projects" class="nav-link">
+                <a href="#projects-section" class="nav-link resume-nav">
                     <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
                     Projects
                 </a>
-                <a href="#skills" class="nav-link">
+                <a href="#education" class="nav-link resume-nav">
+                    <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.26 10.147L12 14.64l7.74-4.493a4.5 4.5 0 0 1 4.5 0l.26.151a.75.75 0 0 1 0 1.299l-12 6.975a.75.75 0 0 1-.75 0l-12-6.975a.75.75 0 0 1 0-1.299l.26-.151a4.5 4.5 0 0 1 4.5 0Z" /><path d="M4.5 16.5v1.875a1.125 1.125 0 0 0 1.125 1.125h12.75A1.125 1.125 0 0 0 19.5 18.375V16.5M12 3v1.5m0 9V18m-3-5.25h6" /></svg>
+                    Education
+                </a>
+                <a href="#skills" class="nav-link resume-nav">
                     <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg>
                     Skills
+                </a>
+                <a href="#service" class="nav-link resume-nav">
+                    <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+                    Service
+                </a>
+                <a href="#volunteer" class="nav-link resume-nav">
+                    <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" /></svg>
+                    Volunteer
+                </a>
+                <a href="#interests" class="nav-link resume-nav">
+                    <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.563.563 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.563.563 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                    Interests
+                </a>
+                
+                <a href="#personal-unified" class="nav-link library-nav" style="display: none;">
+                    <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.048 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path d="M12 18a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" /></svg>
+                    Personal Content
                 </a>
             </nav>
 
             <div class="social-links">
-                <a href="#" class="social-link email" style="display: none;">
+                <div class="sidebar-link-header">Credentials</div>
+                <div class="social-link resume-combined-link">
+                    <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                    <span class="label">Resume</span>
+                    <div class="resume-actions-compact">
+                        <a href="#" target="_blank" class="resume-view" title="View Resume">
+                            <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                        </a>
+                        <a href="#" target="_blank" class="resume-download" title="Download Resume">
+                            <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M7.5 12l4.5 4.5m0 0 4.5-4.5M12 3v13.5" /></svg>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="social-link email">
                     <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 3v18h24V3H0zm21.518 2L12 12.713 2.482 5h19.036zM2 19V6.183l10 8.116 10-8.116V19H2z"/></svg>
-                    Email
+                    <span class="label">Email</span>
+                    <button class="copy-btn" title="Copy Email" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this)">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" /></svg>
+                    </button>
                 </a>
-                <a href="#" target="_blank" class="social-link linkedin" style="display: none;">
+                <a href="#" target="_blank" class="social-link linkedin">
                     <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                     LinkedIn
                 </a>
-                <a href="#" target="_blank" class="social-link github" style="display: none;">
-                    <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                    GitHub
-                </a>
-                <a href="#" target="_blank" class="social-link kaggle" style="display: none;">
-                    <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.322-.248.472-.248h3.27c.176 0 .285.069.325.208.026.103-.006.202-.092.298l-7.031 7.003 7.888 9.926c.101.15.101.272-.001.367Z"/></svg>
-                    Kaggle
-                </a>
-                <a href="#" target="_blank" class="social-link leetcode" style="display: none;">
-                    <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.77 9.77a1.374 1.374 0 0 0 0 1.942l1.1 1.1a1.374 1.374 0 0 0 1.941 0L15.31 3.703a1.374 1.374 0 0 0 0-1.941L14.444.414A1.374 1.374 0 0 0 13.483 0zm-6.135 11.039a1.374 1.374 0 0 0-1.942 0l-1.1 1.1a1.374 1.374 0 0 0 0 1.941l9.77 9.77a1.374 1.374 0 0 0 1.942 0l1.1-1.1a1.374 1.374 0 0 0 0-1.941l-9.77-9.77zM22.213 8.062a1.374 1.374 0 0 0-1.374 1.374v6.134a1.374 1.374 0 0 0 2.748 0V9.436a1.374 1.374 0 0 0-1.374-1.374z"/></svg>
-                    LeetCode
-                </a>
-                <a href="#" target="_blank" class="social-link facebook" style="display: none;">
-                    <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    Facebook
-                </a>
+
+                <button id="show-more-links" class="social-link" style="justify-content: center; background: var(--bg-tertiary); border-style: dashed;" onclick="toggleMoreSocialLinks()">
+                    Show More Links ▾
+                </button>
+
+                <div id="extra-social-links" style="flex-direction: column; gap: 2px; width: 100%;">
+                    <div class="sidebar-link-header">Technical</div>
+                    <a href="#" target="_blank" class="social-link github">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        GitHub
+                    </a>
+                    <a href="#" target="_blank" class="social-link kaggle">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.322-.248.472-.248h3.27c.176 0 .285.069.325.208.026.103-.006.202-.092.298l-7.031 7.003 7.888 9.926c.101.15.101.272-.001.367Z"/></svg>
+                        Kaggle
+                    </a>
+                    <a href="#" target="_blank" class="social-link leetcode">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.77 9.77a1.374 1.374 0 0 0 0 1.942l1.1 1.1a1.374 1.374 0 0 0 1.941 0L15.31 3.703a1.374 1.374 0 0 0 0-1.941L14.444.414A1.374 1.374 0 0 0 13.483 0zm-6.135 11.039a1.374 1.374 0 0 0-1.942 0l-1.1 1.1a1.374 1.374 0 0 0 0 1.941l9.77 9.77a1.374 1.374 0 0 0 1.942 0l1.1-1.1a1.374 1.374 0 0 0 0-1.941l-9.77-9.77zM22.213 8.062a1.374 1.374 0 0 0-1.374 1.374v6.134a1.374 1.374 0 0 0 2.748 0V9.436a1.374 1.374 0 0 0-1.374-1.374z"/></svg>
+                        LeetCode
+                    </a>
+                    <a href="https://open.kattis.com/users/tylermoe" target="_blank" class="social-link kattis">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0-2C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-2 15h4v1.5h-4V15zm0-3h4v1.5h-4V12zm0-3h4v1.5h-4V9zM7.5 13H6v-2h1.5v2zm10.5 0h-1.5v-2H18v2zM12 4c-3.313 0-6 2.687-6 6 0 1.38.47 2.648 1.258 3.66l.001.002.002.002c.813 1.054 2.062 1.734 3.477 1.815l.012.001h2.5c1.415-.081 2.664-.761 3.477-1.815l.002-.002.001-.002c.788-1.012 1.258-2.28 1.258-3.66 0-3.313-2.687-6-6-6z"/></svg>
+                        Kattis
+                    </a>
+
+                    <div class="sidebar-link-header">Social</div>
+                    <a href="#" target="_blank" class="social-link facebook">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.728 0 1.325-.597 1.325-1.326V1.326C24 .597 23.403 0 22.675 0z"/></svg>
+                        Facebook
+                    </a>
+
+                    <div class="sidebar-link-header">Other</div>
+                    <a href="https://orcid.org/0009-0000-7558-2373" target="_blank" class="social-link orcid">
+                        <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.541 0 .983.442.983.983s-.442.983-.983.983-.983-.442-.983-.983.442-.983.983-.983.442-.983.983-.983zm-.133 13.111h-1.63V7.954h1.63v9.535zm6.541 0h-1.721v-9.535h3.332c2.103 0 3.42 1.398 3.42 3.197 0 1.543-1.012 2.766-2.503 3.093l2.871 3.245h-2.13l-2.434-2.885h-1.025v2.885h.19zm0-4.464h1.341c1.173 0 1.936-.615 1.936-1.576s-.763-1.562-1.936-1.562h-1.341v3.138z"/></svg>
+                        ORCID
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Tyler Moessing</p>
+            </div>
+
+            <!-- Theme Toggle -->
+            <div class="theme-toggle-container">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                    <svg class="sun-icon icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
+                    <svg class="moon-icon icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: none;"><path d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+                </button>
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- About Section -->
-            <section id="about" class="section">
-                <h2 class="section-title">About</h2>
-                <div class="section-description"></div>
-                <div class="additional-content" id="aboutAdditional">
-                    <div class="section-description"></div>
-                </div>
-                <button class="btn btn-secondary" onclick="toggleAbout()" style="display: none;">Read More</button>
-            </section>
+            <div id="resume-view" class="view-section active">
+                <div class="professional-layout">
+                    <div class="professional-main">
+                        <!-- About Section -->
+                        <section id="about" class="section">
+                            <h2 class="section-title">About</h2>
+                            <div class="section-description"></div>
+                            <div class="additional-content" id="aboutAdditional">
+                                <div class="section-description"></div>
+                            </div>
+                            <button class="btn btn-secondary" onclick="toggleAbout()" style="display: none;">Read More</button>
+                        </section>
 
-            <!-- Experience Section -->
-            <section id="experience" class="section">
-                <h2 class="section-title">Experience</h2>
-                <div id="experience-container">
-                    <!-- Populated by content-loader.js -->
-                </div>
-            </section>
+                        <!-- Experience Section -->
+                        <section id="experience" class="section">
+                            <h2 class="section-title">Experience</h2>
+                            <div id="experience-container">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                            <div id="full-history-container" style="display: none; margin-top: var(--spacing-lg); text-align: center;">
+                                <a href="#" target="_blank" class="btn btn-secondary full-history-link">
+                                    View Full Career History →
+                                </a>
+                            </div>
+                        </section>
 
-            <!-- Education Section -->
-            <section id="education" class="section">
-                <h2 class="section-title">Education</h2>
-                <div id="education-container">
-                    <!-- Populated by content-loader.js -->
-                </div>
-            </section>
+                        <!-- Education Section -->
+                        <section id="education" class="section">
+                            <h2 class="section-title">Education</h2>
+                            <div id="education-container">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                        </section>
 
-            <section id="projects" class="section">
-                <div class="section-header-row">
-                    <h2 class="section-title">Projects</h2>
-                    <a href="#" target="_blank" class="venmo-btn" style="display: none;">
-                        <svg class="venmo-icon" viewBox="-2 -2 28 28" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.88 4.94c.52.85.75 1.72.75 2.83 0 3.52-3 8.1-5.45 11.31H8.66l-2.23-13.36 4.88-.46 1.19 9.51c1.1-1.8 2.47-4.63 2.47-6.55 0-1.05-.18-1.77-.46-2.36l3.37.02z" />
-                        </svg> Support on Venmo
-                    </a>
-                </div>
-                <div id="projects-container">
-                    <!-- Populated by content-loader.js -->
-                </div>
-            </section>
+                        <!-- Skills Section -->
+                        <section id="skills" class="section">
+                            <h2 class="section-title">Skills</h2>
+                            <div class="skills-grid">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                        </section>
 
-            <!-- Skills Section -->
-            <section id="skills" class="section">
-                <h2 class="section-title">Skills</h2>
-                <div class="skills-grid">
-                    <!-- Populated by content-loader.js -->
-                </div>
-            </section>
+                        <!-- Service Section -->
+                        <section id="service" class="section">
+                            <h2 class="section-title">Service</h2>
+                            <div id="service-container">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                        </section>
 
-            <!-- Interests Section -->
-            <section id="interests" class="section">
-                <h2 class="section-title">Interests & Community</h2>
-                <div id="interests-container">
-                    <!-- Populated by content-loader.js -->
+                        <!-- Volunteer Section -->
+                        <section id="volunteer" class="section">
+                            <h2 class="section-title">Volunteer</h2>
+                            <div id="volunteer-container">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                        </section>
+
+                        <!-- Interests Section -->
+                        <section id="interests" class="section">
+                            <h2 class="section-title">Interests</h2>
+                            <div id="interests-container">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Timeline Sidebar -->
+                    <aside class="timeline-sidebar">
+                        <div class="timeline-sticky">
+                            <h3 class="timeline-sidebar-title">Journey</h3>
+                            <div class="timeline-legend">
+                                <div class="legend-item"><span class="legend-dot job"></span>Job</div>
+                                <div class="legend-item"><span class="legend-dot education"></span>Education</div>
+                                <div class="legend-item"><span class="legend-dot research"></span>Research</div>
+                                <div class="legend-item"><span class="legend-dot project"></span>Project</div>
+                                <div class="legend-item"><span class="legend-dot volunteer"></span>Volunteer</div>
+                                <div class="legend-item"><span class="legend-dot leadership"></span>Leadership</div>
+                            </div>
+                            <div id="timeline-container">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                        </div>
+                    </aside>
                 </div>
-            </section>
+            </div>
+
+            <div id="library-view" class="view-section" style="display: none;">
+                <section id="personal-unified" class="section">
+                    <div class="section-header-row">
+                        <h2 class="section-title">Projects & Personal Content</h2>
+                    </div>
+                    <div id="personal-unified-container" class="projects-grid">
+                        <!-- Populated by content-loader.js -->
+                    </div>
+                </section>
+            </div>
+
+            <div id="search-view" class="view-section" style="display: none;">
+                <section class="section">
+                    <div class="section-header-row" style="justify-content: center; position: relative;">
+                        <h2 class="section-title" style="margin-bottom: 0;">Search Content</h2>
+                        <button onclick="goBackFromSearch()" class="btn btn-outline" style="position: absolute; right: 0; font-size: 0.75rem; padding: 4px 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Back to Previous</button>
+                    </div>
+                    
+                    <div class="search-container-main" style="margin-bottom: var(--spacing-xl); background: var(--card-bg); padding: var(--spacing-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                        <div style="position: relative; display: flex; align-items: center; gap: var(--spacing-md);">
+                            <div style="position: relative; flex: 1;">
+                                <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                                <input type="text" id="search-input" placeholder="Search by tag, technology, or keywords..." 
+                                    style="width: 100%; padding: 12px 12px 12px 40px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem;"
+                                    oninput="if(window.contentLoader) window.contentLoader.performSearch(this.value)">
+                            </div>
+                            <button class="btn btn-outline" style="gap: 8px; white-space: nowrap; padding: 12px 20px;" disabled title="Coming Soon">
+                                <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.722L18 9.75l-.259-1.028a2.25 2.25 0 00-1.463-1.463L15.25 7l1.028-.259a2.25 2.25 0 001.463-1.463L18 4.25l.259 1.028a2.25 2.25 0 001.463 1.463L20.75 7l-1.028.259a2.25 2.25 0 00-1.463 1.463z" /></svg>
+                                Ask AI (Soon)
+                            </button>
+                        </div>
+                        <div style="margin-top: 12px; font-size: 0.85rem; color: var(--text-secondary);">
+                            Found <span id="search-count" style="font-weight: 700; color: var(--primary-blue);">0</span> results for "<span id="search-query-display">...</span>"
+                        </div>
+                    </div>
+
+                    <div id="search-results-container">
+                        <!-- Populated by content-loader.js -->
+                    </div>
+                </section>
+            </div>
+
+            <div id="ai-view" class="view-section" style="display: none;">
+                <section class="section">
+                    <div class="section-header-row" style="justify-content: center; position: relative;">
+                        <h2 class="section-title" style="margin-bottom: 0;">Ask AI Assistant</h2>
+                        <button onclick="goBackFromSearch()" class="btn btn-outline" style="position: absolute; right: 0; font-size: 0.75rem; padding: 4px 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Back to Previous</button>
+                    </div>
+                    <div class="card" style="text-align: center; padding: 3rem;">
+                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 48px; height: 48px; color: var(--primary-blue); margin-bottom: 1rem;"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.722L18 9.75l-.259-1.028a2.25 2.25 0 00-1.463-1.463L15.25 7l1.028-.259a2.25 2.25 0 001.463-1.463L18 4.25l.259 1.028a2.25 2.25 0 001.463 1.463L20.75 7l-1.028.259a2.25 2.25 0 00-1.463 1.463z" /></svg>
+                        <h3 class="card-title">AI Assistant Coming Soon</h3>
+                        <p class="card-description">I'm currently training my assistant to help you navigate my background more effectively. Stay tuned!</p>
+                    </div>
+                </section>
+            </div>
         </main>
     </div>
 
     <script>
+        let currentActiveView = 'resume';
+        let previousView = 'resume';
+
+        function switchView(view, updateHash = true) {
+            const resumeBtn = document.getElementById('btn-resume');
+            const libraryBtn = document.getElementById('btn-library');
+            const slider = document.querySelector('.toggle-slider');
+            const resumeView = document.getElementById('resume-view');
+            const libraryView = document.getElementById('library-view');
+            const searchView = document.getElementById('search-view');
+            const aiView = document.getElementById('ai-view');
+            const backBtn = document.getElementById('btn-back-to-resume');
+            
+            // Hide everything first
+            resumeView.style.display = 'none';
+            libraryView.style.display = 'none';
+            searchView.style.display = 'none';
+            aiView.style.display = 'none';
+            if (backBtn) backBtn.style.display = 'none';
+            
+            // Reset nav links active state
+            document.querySelectorAll('.nav-link, .btn-outline').forEach(l => l.classList.remove('active'));
+
+            if (view === 'resume' || view === 'professional' || view === '#/professional') {
+                currentActiveView = 'resume';
+                resumeBtn.classList.add('active');
+                libraryBtn.classList.remove('active');
+                slider.style.transform = 'translateX(0)';
+                
+                resumeView.style.display = 'block';
+                
+                document.querySelectorAll('.resume-nav, .professional-only-nav').forEach(el => el.style.display = 'flex');
+                document.querySelectorAll('.library-nav').forEach(el => el.style.display = 'none');
+                
+                document.title = "Tyler Moessing - Professional";
+                if (updateHash) window.location.hash = '/professional';
+            } else if (view === 'search' || view.includes('search')) {
+                previousView = currentActiveView;
+                currentActiveView = 'search';
+                searchView.style.display = 'block';
+                if (backBtn) backBtn.style.display = 'flex';
+                document.querySelector('.search-nav')?.classList.add('active');
+                
+                document.title = "Tyler Moessing - Search";
+                if (updateHash && !window.location.hash.includes('search')) {
+                    window.location.hash = '/professional/search';
+                }
+
+                setTimeout(() => {
+                    const input = document.querySelector('#search-input');
+                    if (input) {
+                        input.focus();
+                        if (!input.value && window.contentLoader) window.contentLoader.renderSuggestedTags();
+                    }
+                }, 100);
+            } else if (view === 'ai') {
+                previousView = currentActiveView;
+                currentActiveView = 'ai';
+                aiView.style.display = 'block';
+                if (backBtn) backBtn.style.display = 'flex';
+                document.querySelector('.ai-nav')?.classList.add('active');
+                
+                document.title = "Tyler Moessing - Ask AI";
+                if (updateHash) window.location.hash = '/professional/ai';
+            } else {
+                currentActiveView = 'library';
+                resumeBtn.classList.remove('active');
+                libraryBtn.classList.add('active');
+                slider.style.transform = 'translateX(100%)';
+                
+                libraryView.style.display = 'block';
+                
+                document.querySelectorAll('.resume-nav, .professional-only-nav').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.library-nav').forEach(el => el.style.display = 'flex');
+                
+                document.title = "Tyler Moessing - Personal";
+                if (updateHash) window.location.hash = '/personal';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBackFromSearch() {
+            switchView(previousView);
+        }
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash;
+            if (hash.startsWith('#/professional/search')) {
+                if (currentActiveView !== 'search') switchView('search', false);
+                if (window.contentLoader) window.contentLoader.handleSearchFromHash();
+            } else if (hash === '#/professional/ai') {
+                if (currentActiveView !== 'ai') switchView('ai', false);
+            } else if (hash === '#/personal') {
+                switchView('library', false);
+            } else {
+                switchView('resume', false);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash;
+            if (hash.startsWith('#/professional/search')) {
+                switchView('search', false);
+            } else if (hash === '#/professional/ai') {
+                switchView('ai', false);
+            } else if (hash === '#/personal') {
+                switchView('library', false);
+            } else {
+                switchView('resume', false);
+                if (!hash || hash === '#') window.location.hash = '/professional';
+            }
+        });
+
         function toggleAbout() {
             const content = document.getElementById('aboutAdditional');
             const button = event.target;
-
             if (content.classList.contains('show')) {
                 content.classList.remove('show');
                 button.textContent = 'Read More';
@@ -148,40 +469,91 @@
             }
         }
 
-        // Smooth scrolling for navigation links
+        async function copyLink(btn) {
+            const link = btn.closest('.social-link');
+            const url = link.getAttribute('href');
+            let textToCopy = url;
+            if (url.startsWith('mailto:')) textToCopy = url.replace('mailto:', '');
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                const originalSvg = btn.innerHTML;
+                btn.innerHTML = `<svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #22c55e;"><path d="m4.5 12.75 6 6 9-13.5" /></svg>`;
+                setTimeout(() => { btn.innerHTML = originalSvg; }, 2000);
+            } catch (err) { console.error('Failed to copy: ', err); }
+        }
+
+        function toggleMoreSocialLinks() {
+            const extraLinks = document.getElementById('extra-social-links');
+            const showMoreBtn = document.getElementById('show-more-links');
+            if (extraLinks.style.display === 'none' || extraLinks.style.display === '') {
+                extraLinks.style.display = 'flex';
+                showMoreBtn.textContent = 'Show Less Links ▴';
+            } else {
+                extraLinks.style.display = 'none';
+                showMoreBtn.textContent = 'Show More Links ▾';
+            }
+        }
+
+        // Smooth scrolling
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function (e) {
-                e.preventDefault();
                 const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                    // Update active nav link
-                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
+                if (targetId.startsWith('#') && !targetId.includes('/')) {
+                    e.preventDefault();
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Highlight active section on scroll
-        window.addEventListener('scroll', function () {
-            let current = '';
-            const sections = document.querySelectorAll('.section');
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const moonIcon = document.querySelector('.moon-icon');
+        const sunIcon = document.querySelector('.sun-icon');
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+        themeToggle.addEventListener('click', () => {
+            setTheme(body.classList.contains('dark-mode') ? 'light' : 'dark');
+        });
+
+        // Mobile Menu Toggle Logic
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('mobile-menu-open');
+                // Lock scroll when menu is open on mobile
+                if (window.innerWidth <= 1024) {
+                    document.body.style.overflow = sidebar.classList.contains('mobile-menu-open') ? 'hidden' : '';
                 }
             });
+        }
 
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-link, .sidebar-btn, .social-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    sidebar.classList.remove('mobile-menu-open');
+                    document.body.style.overflow = '';
                 }
             });
         });

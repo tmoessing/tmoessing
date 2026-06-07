@@ -2,20 +2,20 @@
 
 ## How to Edit Your Resume
 
-All your resume content is now managed through the **`content.md`** file. Simply edit this file to update your website - no need to touch the HTML!
+All your resume content is managed through two main files: **`professional_content.md`** and **`personal_content.md`**. Simply edit these files to update your website - no need to touch the HTML!
 
 ### Quick Start
 
-1. Open `content.md` in any text editor
+1. Open `professional_content.md` (for your career) or `personal_content.md` (for projects/books)
 2. Edit the content you want to change
 3. Save the file
 4. Refresh your browser to see the changes
 
 ### Content Structure
 
-The `content.md` file is organized into sections:
+The files are organized into sections:
 
-#### Profile
+#### Profile (Professional)
 ```markdown
 ## Profile
 name: Tyler Moessing
@@ -23,7 +23,7 @@ title: CS Student @ BYU | ML Enthusiast
 photo: resources/profile_pic.jpeg
 ```
 
-#### Contact Links
+#### Contact Links (Professional)
 ```markdown
 ## Contact
 email: tyler@moessing.com
@@ -31,7 +31,7 @@ linkedin: https://www.linkedin.com/in/tmoessing/
 github: https://github.com/tmoessing
 ```
 
-#### About Section
+#### About Section (Professional)
 ```markdown
 ## About
 Your main bio paragraph goes here...
@@ -40,7 +40,7 @@ Your main bio paragraph goes here...
 Additional information that appears when "Read More" is clicked...
 ```
 
-#### Experience
+#### Experience (Professional)
 Each job is a subsection with the format:
 ```markdown
 ### Job Title
@@ -50,7 +50,7 @@ description: What you did in this role...
 tags: Python, Data Analysis, Visualization
 ```
 
-#### Education
+#### Education (Professional)
 Similar format to experience:
 ```markdown
 ### Degree Name
@@ -63,7 +63,7 @@ honors: Awards or honors
 coursework: Course 1, Course 2, Course 3
 ```
 
-#### Projects
+#### Projects (Professional & Personal)
 ```markdown
 ### Project Name
 image: resources/project_image.jpg
@@ -74,26 +74,26 @@ status: live OR in-development
 note: Optional note like "Est. 2 years"
 ```
 
-#### Skills
+#### Skills (Professional)
 ```markdown
 ### Category Name
 Skill 1, Skill 2, Skill 3
 ```
 
-#### Interests
+#### Interests (Professional - Extracurriculars)
 ```markdown
 ### Interest Title
 description: Description of the interest...
 ```
 
-For helpful resources:
+For helpful resources (Personal):
 ```markdown
 - Resource Name | https://resource-url.com
 ```
 
 ### Tips
 
-- **No HTML needed**: Just edit the markdown file
+- **No HTML needed**: Just edit the markdown files
 - **Comma-separated lists**: Use commas for tags, skills, and coursework
 - **URLs**: Just paste the full URL, no special formatting needed
 - **Images**: Reference images in the `resources/` folder
@@ -103,11 +103,12 @@ For helpful resources:
 
 ```
 tyler.moessing/
-├── index.html          (Don't edit - auto-populated)
-├── styles.css          (Edit for design changes)
-├── content.md          (Edit this for content changes!)
-├── content-loader.js   (Don't edit - handles loading)
-└── resources/          (Your images go here)
+├── index.html              (Don't edit - auto-populated)
+├── styles.css              (Edit for design changes)
+├── professional_content.md (Edit this for career content!)
+├── personal_content.md     (Edit this for personal content!)
+├── content-loader.js       (Don't edit - handles loading)
+└── resources/              (Your images go here)
 ```
 
 ### Troubleshooting
@@ -115,13 +116,13 @@ tyler.moessing/
 **Changes not showing?**
 - Hard refresh your browser (Ctrl+Shift+R or Cmd+Shift+R)
 - Check browser console for errors (F12)
-- Make sure `content.md` is saved
+- Make sure the `.md` files are saved
 
 **Content looks weird?**
-- Check formatting in `content.md`
+- Check formatting in the markdown files
 - Make sure key-value pairs use format `key: value`
 - Ensure subsections start with `###`
 
 **Want to add a new section?**
-- Follow the existing patterns in `content.md`
+- Follow the existing patterns in the markdown files
 - You may need to update `content-loader.js` for completely new section types
