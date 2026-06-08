@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyler Moessing - Professional</title>
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
-    <link rel="stylesheet" href="styles/styles.css?v=3.3">
-    <script type="module" src="src/content-loader.js?v=3.3"></script>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="css/main.css">
+    <script type="module" src="js/main.js"></script>
 </head>
 
 <body>
@@ -63,16 +60,16 @@
                     </button>
                 </div>
                 
-                <div id="sidebar-search-container" class="professional-only-nav" style="display: flex; gap: 3px; margin: 8px 0; width: 100%;">
-                    <a href="#/professional" id="btn-outline-nav" class="btn-outline sidebar-btn outline-nav" style="flex: 1; padding: 6px 2px;" onclick="event.preventDefault(); switchView('resume');">
+                <div id="sidebar-search-container" class="professional-only-nav">
+                    <a href="#/professional" id="btn-outline-nav" class="btn-outline sidebar-btn outline-nav" onclick="event.preventDefault(); switchView('resume');">
                         <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" /></svg>
                         Outline
                     </a>
-                    <a href="#/professional/search" class="btn-outline sidebar-btn search-nav" style="flex: 1; padding: 6px 2px;" onclick="event.preventDefault(); switchView('search');">
+                    <a href="#/professional/search" class="btn-outline sidebar-btn search-nav" onclick="event.preventDefault(); switchView('search');">
                         <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
                         Search
                     </a>
-                    <a href="#/professional/ai" class="btn-outline sidebar-btn ai-nav disabled" style="flex: 1; padding: 6px 2px;" onclick="event.preventDefault();" title="Coming Soon">
+                    <a href="#/professional/ai" class="btn-outline sidebar-btn ai-nav disabled" onclick="event.preventDefault();" title="Coming Soon">
                         <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
                         AI
                     </a>
@@ -116,7 +113,7 @@
                 
                 <a href="#personal-unified" class="nav-link library-nav" style="display: none;">
                     <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.048 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path d="M12 18a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" /></svg>
-                    Personal Content
+                    Personal Center
                 </a>
             </nav>
 
@@ -146,11 +143,11 @@
                     LinkedIn
                 </a>
 
-                <button id="show-more-links" class="social-link" style="justify-content: center; background: var(--bg-tertiary); border-style: dashed;" onclick="toggleMoreSocialLinks()">
+                <button id="show-more-links" class="social-link" onclick="toggleMoreSocialLinks()">
                     Show More Links ▾
                 </button>
 
-                <div id="extra-social-links" style="flex-direction: column; gap: 2px; width: 100%;">
+                <div id="extra-social-links">
                     <div class="sidebar-link-header">Technical</div>
                     <a href="#" target="_blank" class="social-link github">
                         <svg class="icon icon-fill" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
@@ -232,6 +229,14 @@
                             </div>
                         </section>
 
+                        <!-- Projects Section -->
+                        <section id="projects-section" class="section">
+                            <h2 class="section-title">Projects</h2>
+                            <div id="projects-container" class="projects-grid">
+                                <!-- Populated by content-loader.js -->
+                            </div>
+                        </section>
+
                         <!-- Skills Section -->
                         <section id="skills" class="section">
                             <h2 class="section-title">Skills</h2>
@@ -287,10 +292,23 @@
 
             <div id="library-view" class="view-section" style="display: none;">
                 <section id="personal-unified" class="section">
-                    <div class="section-header-row">
-                        <h2 class="section-title">Projects & Personal Content</h2>
+                    <div class="section-header-row" style="margin-bottom: var(--spacing-md); justify-content: center;">
+                        <h2 class="section-title" style="margin-bottom: 0;">Personal Center</h2>
                     </div>
-                    <div id="personal-unified-container" class="projects-grid">
+
+                    <div class="personal-toggle-container">
+                        <div class="toggle-container personal-sub-toggle">
+                            <div class="toggle-slider" id="personal-sub-slider"></div>
+                            <button onclick="switchPersonalView('picks')" class="toggle-btn active" id="btn-picks">
+                                Sick Picks & Plugs
+                            </button>
+                            <button onclick="switchPersonalView('projects')" class="toggle-btn" id="btn-personal-projects">
+                                Personal Projects
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="personal-unified-container">
                         <!-- Populated by content-loader.js -->
                     </div>
                 </section>
@@ -298,17 +316,16 @@
 
             <div id="search-view" class="view-section" style="display: none;">
                 <section class="section">
-                    <div class="section-header-row" style="justify-content: center; position: relative;">
+                    <div class="search-view-container">
                         <h2 class="section-title" style="margin-bottom: 0;">Search Content</h2>
-                        <button onclick="goBackFromSearch()" class="btn btn-outline" style="position: absolute; right: 0; font-size: 0.75rem; padding: 4px 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Back to Previous</button>
+                        <button onclick="goBackFromSearch()" class="btn btn-outline search-back-btn">Back to Previous</button>
                     </div>
                     
-                    <div class="search-container-main" style="margin-bottom: var(--spacing-xl); background: var(--card-bg); padding: var(--spacing-lg); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
-                        <div style="position: relative; display: flex; align-items: center; gap: var(--spacing-md);">
-                            <div style="position: relative; flex: 1;">
-                                <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                    <div class="search-box">
+                        <div class="search-input-wrapper">
+                            <div class="search-input-inner">
+                                <svg class="icon icon-stroke search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
                                 <input type="text" id="search-input" placeholder="Search by tag, technology, or keywords..." 
-                                    style="width: 100%; padding: 12px 12px 12px 40px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem;"
                                     oninput="if(window.contentLoader) window.contentLoader.performSearch(this.value)">
                             </div>
                             <button class="btn btn-outline" style="gap: 8px; white-space: nowrap; padding: 12px 20px;" disabled title="Coming Soon">
@@ -316,8 +333,8 @@
                                 Ask AI (Soon)
                             </button>
                         </div>
-                        <div style="margin-top: 12px; font-size: 0.85rem; color: var(--text-secondary);">
-                            Found <span id="search-count" style="font-weight: 700; color: var(--primary-blue);">0</span> results for "<span id="search-query-display">...</span>"
+                        <div class="search-meta">
+                            Found <span id="search-count" class="search-count-highlight">0</span> results for "<span id="search-query-display">...</span>"
                         </div>
                     </div>
 
@@ -329,12 +346,12 @@
 
             <div id="ai-view" class="view-section" style="display: none;">
                 <section class="section">
-                    <div class="section-header-row" style="justify-content: center; position: relative;">
+                    <div class="search-view-container">
                         <h2 class="section-title" style="margin-bottom: 0;">Ask AI Assistant</h2>
-                        <button onclick="goBackFromSearch()" class="btn btn-outline" style="position: absolute; right: 0; font-size: 0.75rem; padding: 4px 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Back to Previous</button>
+                        <button onclick="goBackFromSearch()" class="btn btn-outline search-back-btn">Back to Previous</button>
                     </div>
-                    <div class="card" style="text-align: center; padding: 3rem;">
-                        <svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 48px; height: 48px; color: var(--primary-blue); margin-bottom: 1rem;"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.722L18 9.75l-.259-1.028a2.25 2.25 0 00-1.463-1.463L15.25 7l1.028-.259a2.25 2.25 0 001.463-1.463L18 4.25l.259 1.028a2.25 2.25 0 001.463 1.463L20.75 7l-1.028.259a2.25 2.25 0 00-1.463 1.463z" /></svg>
+                    <div class="card ai-empty-state">
+                        <svg class="icon icon-stroke ai-empty-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.722L18 9.75l-.259-1.028a2.25 2.25 0 00-1.463-1.463L15.25 7l1.028-.259a2.25 2.25 0 001.463-1.463L18 4.25l.259 1.028a2.25 2.25 0 001.463 1.463L20.75 7l-1.028.259a2.25 2.25 0 00-1.463 1.463z" /></svg>
                         <h3 class="card-title">AI Assistant Coming Soon</h3>
                         <p class="card-description">I'm currently training my assistant to help you navigate my background more effectively. Stay tuned!</p>
                     </div>
@@ -344,219 +361,7 @@
     </div>
 
     <script>
-        let currentActiveView = 'resume';
-        let previousView = 'resume';
-
-        function switchView(view, updateHash = true) {
-            const resumeBtn = document.getElementById('btn-resume');
-            const libraryBtn = document.getElementById('btn-library');
-            const slider = document.querySelector('.toggle-slider');
-            const resumeView = document.getElementById('resume-view');
-            const libraryView = document.getElementById('library-view');
-            const searchView = document.getElementById('search-view');
-            const aiView = document.getElementById('ai-view');
-            const backBtn = document.getElementById('btn-back-to-resume');
-            
-            // Hide everything first
-            resumeView.style.display = 'none';
-            libraryView.style.display = 'none';
-            searchView.style.display = 'none';
-            aiView.style.display = 'none';
-            if (backBtn) backBtn.style.display = 'none';
-            
-            // Reset nav links active state
-            document.querySelectorAll('.nav-link, .btn-outline').forEach(l => l.classList.remove('active'));
-
-            if (view === 'resume' || view === 'professional' || view === '#/professional') {
-                currentActiveView = 'resume';
-                resumeBtn.classList.add('active');
-                libraryBtn.classList.remove('active');
-                slider.style.transform = 'translateX(0)';
-                
-                resumeView.style.display = 'block';
-                
-                document.querySelectorAll('.resume-nav, .professional-only-nav').forEach(el => el.style.display = 'flex');
-                document.querySelectorAll('.library-nav').forEach(el => el.style.display = 'none');
-                
-                document.title = "Tyler Moessing - Professional";
-                if (updateHash) window.location.hash = '/professional';
-            } else if (view === 'search' || view.includes('search')) {
-                previousView = currentActiveView;
-                currentActiveView = 'search';
-                searchView.style.display = 'block';
-                if (backBtn) backBtn.style.display = 'flex';
-                document.querySelector('.search-nav')?.classList.add('active');
-                
-                document.title = "Tyler Moessing - Search";
-                if (updateHash && !window.location.hash.includes('search')) {
-                    window.location.hash = '/professional/search';
-                }
-
-                setTimeout(() => {
-                    const input = document.querySelector('#search-input');
-                    if (input) {
-                        input.focus();
-                        if (!input.value && window.contentLoader) window.contentLoader.renderSuggestedTags();
-                    }
-                }, 100);
-            } else if (view === 'ai') {
-                previousView = currentActiveView;
-                currentActiveView = 'ai';
-                aiView.style.display = 'block';
-                if (backBtn) backBtn.style.display = 'flex';
-                document.querySelector('.ai-nav')?.classList.add('active');
-                
-                document.title = "Tyler Moessing - Ask AI";
-                if (updateHash) window.location.hash = '/professional/ai';
-            } else {
-                currentActiveView = 'library';
-                resumeBtn.classList.remove('active');
-                libraryBtn.classList.add('active');
-                slider.style.transform = 'translateX(100%)';
-                
-                libraryView.style.display = 'block';
-                
-                document.querySelectorAll('.resume-nav, .professional-only-nav').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.library-nav').forEach(el => el.style.display = 'flex');
-                
-                document.title = "Tyler Moessing - Personal";
-                if (updateHash) window.location.hash = '/personal';
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function goBackFromSearch() {
-            switchView(previousView);
-        }
-
-        window.addEventListener('hashchange', () => {
-            const hash = window.location.hash;
-            if (hash.startsWith('#/professional/search')) {
-                if (currentActiveView !== 'search') switchView('search', false);
-                if (window.contentLoader) window.contentLoader.handleSearchFromHash();
-            } else if (hash === '#/professional/ai') {
-                if (currentActiveView !== 'ai') switchView('ai', false);
-            } else if (hash === '#/personal') {
-                switchView('library', false);
-            } else {
-                switchView('resume', false);
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash;
-            if (hash.startsWith('#/professional/search')) {
-                switchView('search', false);
-            } else if (hash === '#/professional/ai') {
-                switchView('ai', false);
-            } else if (hash === '#/personal') {
-                switchView('library', false);
-            } else {
-                switchView('resume', false);
-                if (!hash || hash === '#') window.location.hash = '/professional';
-            }
-        });
-
-        function toggleAbout() {
-            const content = document.getElementById('aboutAdditional');
-            const button = event.target;
-            if (content.classList.contains('show')) {
-                content.classList.remove('show');
-                button.textContent = 'Read More';
-            } else {
-                content.classList.add('show');
-                button.textContent = 'Read Less';
-            }
-        }
-
-        async function copyLink(btn) {
-            const link = btn.closest('.social-link');
-            const url = link.getAttribute('href');
-            let textToCopy = url;
-            if (url.startsWith('mailto:')) textToCopy = url.replace('mailto:', '');
-            try {
-                await navigator.clipboard.writeText(textToCopy);
-                const originalSvg = btn.innerHTML;
-                btn.innerHTML = `<svg class="icon icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #22c55e;"><path d="m4.5 12.75 6 6 9-13.5" /></svg>`;
-                setTimeout(() => { btn.innerHTML = originalSvg; }, 2000);
-            } catch (err) { console.error('Failed to copy: ', err); }
-        }
-
-        function toggleMoreSocialLinks() {
-            const extraLinks = document.getElementById('extra-social-links');
-            const showMoreBtn = document.getElementById('show-more-links');
-            if (extraLinks.style.display === 'none' || extraLinks.style.display === '') {
-                extraLinks.style.display = 'flex';
-                showMoreBtn.textContent = 'Show Less Links ▴';
-            } else {
-                extraLinks.style.display = 'none';
-                showMoreBtn.textContent = 'Show More Links ▾';
-            }
-        }
-
-        // Smooth scrolling
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#') && !targetId.includes('/')) {
-                    e.preventDefault();
-                    const targetSection = document.querySelector(targetId);
-                    if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        const moonIcon = document.querySelector('.moon-icon');
-        const sunIcon = document.querySelector('.sun-icon');
-
-        function setTheme(theme) {
-            if (theme === 'dark') {
-                body.classList.add('dark-mode');
-                body.classList.remove('light-mode');
-                moonIcon.style.display = 'block';
-                sunIcon.style.display = 'none';
-            } else {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                moonIcon.style.display = 'none';
-                sunIcon.style.display = 'block';
-            }
-            localStorage.setItem('theme', theme);
-        }
-
-        const savedTheme = localStorage.getItem('theme');
-        setTheme(savedTheme === 'dark' ? 'dark' : 'light');
-
-        themeToggle.addEventListener('click', () => {
-            setTheme(body.classList.contains('dark-mode') ? 'light' : 'dark');
-        });
-
-        // Mobile Menu Toggle Logic
-        const sidebar = document.getElementById('sidebar');
-        const menuToggle = document.getElementById('mobile-menu-toggle');
-        
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('mobile-menu-open');
-                // Lock scroll when menu is open on mobile
-                if (window.innerWidth <= 1024) {
-                    document.body.style.overflow = sidebar.classList.contains('mobile-menu-open') ? 'hidden' : '';
-                }
-            });
-        }
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('.nav-link, .sidebar-btn, .social-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 1024) {
-                    sidebar.classList.remove('mobile-menu-open');
-                    document.body.style.overflow = '';
-                }
-            });
-        });
+        document.write(new Date().getFullYear())
     </script>
 </body>
 

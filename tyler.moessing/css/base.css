@@ -1,0 +1,53 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+  border: 2px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Force dark color scheme for scrollbars when dark-mode is active */
+html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  width: 100%;
+  max-width: 100%;
+}
+
+.icon { width: 0.85rem; height: 0.85rem; flex-shrink: 0; }
+.icon-stroke { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon-fill { fill: currentColor; }
+
+.btn { display: inline-flex; align-items: center; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
+.btn-primary { background: var(--primary-blue); color: white; border: none; }
+.btn-primary:hover { background: var(--primary-blue-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+.btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); }
+.btn-outline { background: transparent; border: 1.5px solid var(--primary-blue); color: var(--primary-blue); }
+.btn-outline:hover:not(.disabled) { background: var(--primary-blue); color: white; transform: translateY(-1px); }
+.btn-outline.disabled { border-color: var(--text-muted); color: var(--text-muted); opacity: 0.6; cursor: not-allowed; }

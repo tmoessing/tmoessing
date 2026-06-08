@@ -20,7 +20,7 @@ The files are organized into sections:
 ## Profile
 name: Tyler Moessing
 title: CS Student @ BYU | ML Enthusiast
-photo: resources/profile_pic.jpeg
+photo: assets/profile_pic.jpeg
 ```
 
 #### Contact Links (Professional)

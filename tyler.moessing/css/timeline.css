@@ -1,0 +1,154 @@
+/* Timeline Sidebar */
+.timeline-sidebar { 
+  width: 400px; 
+  flex-shrink: 0; 
+  position: sticky;
+  top: var(--spacing-lg);
+  align-self: flex-start;
+  max-height: calc(100vh - 2rem);
+}
+.timeline-sticky { 
+  max-height: calc(100vh - 2rem); 
+  overflow-y: auto; 
+  padding: var(--spacing-md); 
+  background: var(--card-bg); 
+  border: 1px solid var(--border-color); 
+  border-radius: var(--radius-lg); 
+}
+.timeline-sidebar-title { 
+  font-size: 1.2rem; 
+  font-weight: 800; 
+  text-transform: uppercase; 
+  text-align: center; 
+  margin-bottom: var(--spacing-md); 
+  color: var(--text-primary); 
+  letter-spacing: 1px;
+  position: sticky;
+  top: 0;
+  background: var(--card-bg);
+  padding-top: var(--spacing-sm);
+  margin-top: calc(-1 * var(--spacing-sm));
+  z-index: 25;
+}
+
+.timeline-legend { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 6px; 
+  margin-bottom: var(--spacing-xl); 
+  padding: var(--spacing-sm); 
+  background: var(--bg-tertiary); 
+  border-radius: var(--radius-md); 
+  border: 1px solid var(--border-color);
+  position: sticky;
+  top: 2.5rem; /* Sits below the title */
+  z-index: 20;
+  box-shadow: 0 4px 6px -4px rgba(0,0,0,0.1);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+.legend-dot.job { background: var(--color-job); }
+.legend-dot.education { background: var(--color-education); }
+.legend-dot.research { background: var(--color-research); }
+.legend-dot.project { background: var(--color-project); }
+.legend-dot.volunteer { background: var(--color-volunteer); }
+.legend-dot.leadership { background: var(--color-leadership); }
+.legend-dot.service { background: var(--color-service); }
+
+#timeline-container { position: relative; width: 100%; min-height: 400px; padding-left: 50px; margin-top: 15px; }
+.timeline-year-marker { position: absolute; left: 50px; right: 0; border-top: 1px dashed var(--border-color); opacity: 0.4; pointer-events: none; }
+.timeline-year-marker span { position: absolute; left: -50px; top: -12px; font-size: 0.75rem; font-weight: 800; color: var(--text-muted); background: var(--card-bg); padding: 2px 5px; border-radius: 4px; z-index: 2; }
+
+.timeline-bar { position: absolute; border-radius: 4px; padding: 1.5px; transition: all 0.2s ease; cursor: pointer; z-index: 5; }
+.timeline-bar:hover { z-index: 10; transform: translateY(-1px); }
+.timeline-bar-content { 
+  height: 100%; 
+  width: 100%; 
+  background: var(--bg-primary); 
+  border: 2px solid currentColor; 
+  border-radius: 4px; 
+  padding: 4px 6px; 
+  overflow: hidden; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.timeline-bar-title { 
+  font-size: 0.85rem; /* Larger font for better readability */
+  font-weight: 700; 
+  text-align: center; 
+  line-height: 1.1;
+  word-wrap: break-word;
+  max-width: 100%;
+  color: var(--text-primary); /* Darker text for better contrast */
+}
+
+.timeline-bar.job .timeline-bar-content { background: rgba(37, 99, 235, 0.12); color: #1d4ed8; }
+.timeline-bar.education .timeline-bar-content { background: rgba(124, 58, 237, 0.12); color: #6d28d9; }
+.timeline-bar.research .timeline-bar-content { background: rgba(13, 148, 136, 0.12); color: #0f766e; }
+.timeline-bar.project .timeline-bar-content { background: rgba(234, 88, 12, 0.12); color: #c2410c; }
+.timeline-bar.volunteer .timeline-bar-content { background: rgba(16, 185, 129, 0.12); color: #047857; }
+.timeline-bar.leadership .timeline-bar-content { background: rgba(245, 158, 11, 0.12); color: #b45309; }
+.timeline-bar.service .timeline-bar-content { background: rgba(239, 68, 68, 0.12); color: #b91c1c; }
+
+.timeline-bar-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000000;
+  color: #ffffff !important;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  width: 220px;
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  line-height: 1.4;
+}
+
+/* Edge alignments to prevent clipping */
+.timeline-bar-tooltip.align-left { left: 0; transform: translateX(0); text-align: left; }
+.timeline-bar-tooltip.align-left::after { left: 20px; transform: none; }
+
+.timeline-bar-tooltip.align-right { left: auto; right: 0; transform: translateX(0); text-align: right; }
+.timeline-bar-tooltip.align-right::after { left: auto; right: 20px; transform: none; }
+
+.timeline-bar:hover .timeline-bar-tooltip { opacity: 1; visibility: visible; }
+
+/* Highlight state for bidirectional interaction */
+.timeline-bar.highlight-bar {
+  z-index: 100;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+.timeline-bar.highlight-bar .timeline-bar-content {
+  border-width: 3px;
+  background: var(--bg-primary); /* Solid background to stand out */
+}
+
+/* Card hover feedback for timeline linking */
+.card:hover, .education-card:hover, .project-card:hover {
+  cursor: pointer; /* Changed from crosshair back to standard pointer */
+}
+
+/* Arrow for the tooltip */
+.timeline-bar-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #000000 transparent transparent transparent;
+}
