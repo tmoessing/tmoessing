@@ -119,6 +119,17 @@ export function initApp() {
         window.switchView(previousView);
     };
 
+    window.askAISidebar = () => {
+        const input = document.getElementById('ai-sidebar-input');
+        const query = input.value.trim();
+        if (query) {
+            window.switchView('ai');
+            // For now, since AI is "Coming Soon", we just clear the input 
+            // and maybe we could show the query in the AI view if it was fully implemented.
+            input.value = '';
+        }
+    };
+
     window.toggleAbout = () => {
         const content = document.getElementById('aboutAdditional');
         const button = event.target;

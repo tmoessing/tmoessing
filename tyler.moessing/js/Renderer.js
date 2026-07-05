@@ -55,14 +55,28 @@ export class Renderer {
         };
 
         Object.entries(socialLinks).forEach(([key, value]) => {
-            if (key === 'resume-link') return this.handleResumeLinks(value);
-            
-            const el = document.querySelector(`.social-link.${key}`);
-            if (el && value && !value.includes('undefined')) {
-                el.setAttribute('href', value);
-                el.classList.remove('disabled');
-                el.style.display = 'flex';
+            if (key === 'resume-link') {
+                this.handleResumeLinks(value);
+                // Also update mobile resume link
+                document.querySelectorAll('.mobile-action-link.resume-link').forEach(el => {
+                    if (value && !value.includes('undefined')) {
+                        el.setAttribute('href', value);
+                        el.classList.remove('disabled');
+                    }
+                });
+                return;
             }
+            
+            const elements = document.querySelectorAll(`.social-link.${key}, .mobile-action-link.${key}`);
+            elements.forEach(el => {
+                if (value && !value.includes('undefined')) {
+                    el.setAttribute('href', value);
+                    el.classList.remove('disabled');
+                    if (!el.classList.contains('mobile-action-link')) {
+                        el.style.display = 'flex';
+                    }
+                }
+            });
         });
 
         // Full History link
