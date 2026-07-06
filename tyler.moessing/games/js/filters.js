@@ -1,5 +1,5 @@
 /**
- * Pure helpers for the board game library: matching predicate, sort
+ * Pure helpers for the game library: matching predicate, sort
  * comparators, shuffle, tag styling, and a generated cover placeholder.
  * No DOM, no imports — safe to reuse anywhere.
  */

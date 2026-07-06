@@ -1,4 +1,4 @@
-/* Game library styles.
+/* Meal library styles.
    Inherit the site's tokens, buttons, cards, and dark mode, then add the
    grid / cards / modal / picker layers on top. */
 @import "../../css/variables.css";
@@ -17,7 +17,7 @@
   align-items: center;
   margin-bottom: var(--spacing-2xl);
 }
-.back-to-site { gap: 6px; }
+.back-to-site { gap: 6px; text-decoration: none; }
 .theme-toggle-btn {
   background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
@@ -34,9 +34,47 @@
 
 .library-hero { text-align: center; margin-bottom: var(--spacing-2xl); }
 .library-hero h1 { font-size: 2.25rem; font-weight: 800; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
-.library-hero p { color: var(--text-secondary); max-width: 620px; margin: 0 auto; }
+.library-hero p { color: var(--text-secondary); max-width: 640px; margin: 0 auto; }
 
-.library-toolbar {
+/* ---------- toolbar: search + pick on row 1, controls on row 2 ---------- */
+.meals-search-row {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+.meals-search {
+  position: relative;
+  flex: 1;
+}
+.meals-search .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: var(--text-muted);
+  pointer-events: none;
+}
+#meal-search {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#meal-search:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+}
+#pick-a-meal-btn { gap: 6px; white-space: nowrap; flex: 0 0 auto; }
+
+.meals-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,7 +82,7 @@
   flex-wrap: wrap;
   margin-bottom: var(--spacing-xl);
 }
-.games-count { font-weight: 700; color: var(--text-secondary); }
+.meals-count { font-weight: 700; color: var(--text-secondary); }
 .toolbar-controls { display: flex; gap: var(--spacing-sm); align-items: center; flex-wrap: wrap; }
 .toolbar-controls label,
 .picker-match-controls label {
@@ -55,7 +93,7 @@
   align-items: center;
   gap: 6px;
 }
-#library-sort,
+#meal-sort,
 #picker-match-sort {
   padding: 8px 10px;
   border: 1px solid var(--border-color);
@@ -90,178 +128,110 @@
 .view-btn.active { background: var(--primary-blue); color: #fff; }
 .view-btn .icon { width: 1.15rem; height: 1.15rem; }
 
-/* ---------- grid + game card ---------- */
-.games-grid {
+/* ---------- grid ---------- */
+.meals-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
   gap: var(--spacing-lg);
 }
-
-/* Card default styling for desc & categories */
-.game-card-desc {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 0.82rem;
+.meals-error,
+.meals-empty {
+  grid-column: 1 / -1;
+  text-align: center;
   color: var(--text-secondary);
-  line-height: 1.4;
-  margin: 0;
+  padding: var(--spacing-2xl);
 }
-.game-card-categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-.game-card-categories .category-tag {
-  background: var(--bg-tertiary);
-  color: var(--primary-blue);
-  border: 1px solid var(--border-color);
-  font-weight: 700;
-  font-size: 0.78rem;
-}
-.game-card-main-info { display: flex; flex-direction: column; gap: var(--spacing-xs); }
 
-/* list view: one card per row, cover left, body right */
-.games-grid.list-view {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-.games-grid.list-view .game-card {
-  flex-direction: row;
-  align-items: stretch;
-}
-.games-grid.list-view .game-cover-wrap {
-  flex: 0 0 140px;
-  aspect-ratio: auto;
-}
-.games-grid.list-view .game-card-body {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-md) var(--spacing-xl);
-  flex: 1;
-}
-.games-grid.list-view .game-card-main-info {
-  flex: 1.2 1 180px;
-}
-.games-grid.list-view .game-card-desc {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  flex: 2 1 280px;
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.45;
-  margin: 0;
-}
-.games-grid.list-view .game-card-details-section {
-  flex: 1.5 1 220px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-.games-grid.list-view .game-card-categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-.games-grid.list-view .game-card-categories .category-tag {
-  background: var(--bg-tertiary);
-  color: var(--primary-blue);
-  border: 1px solid var(--border-color);
-  font-weight: 700;
-  font-size: 0.78rem;
-}
-.games-grid.list-view .game-card-tags {
-  margin-top: 0;
-}
-.games-grid.list-view .game-view-btn {
-  margin-top: 0;
-  flex: 0 0 auto;
-}
-@media (max-width: 800px) {
-  .games-grid.list-view .game-card-body {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-  }
-  .games-grid.list-view .game-card-desc {
-    display: block;
-    -webkit-line-clamp: unset;
-    flex: none;
-    width: 100%;
-  }
-  .games-grid.list-view .game-card-main-info,
-  .games-grid.list-view .game-card-details-section {
-    flex: none;
-    width: 100%;
-  }
-}
-@media (max-width: 560px) {
-  .games-grid.list-view .game-cover-wrap { flex-basis: 80px; }
-  .games-grid.list-view .game-card-body { padding: var(--spacing-sm) var(--spacing-md); }
-}
-.game-card {
+/* ---------- meal card: cover left, info right ---------- */
+.meal-card {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  margin: 0;
 }
-.game-card:hover {
+.meal-card:hover {
   border-color: var(--primary-blue-light);
   box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
 }
-.game-cover-wrap { position: relative; aspect-ratio: 4 / 3; background: var(--bg-tertiary); }
-.game-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
-.game-card-body {
+.meal-card:focus-visible {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2);
+}
+.meal-cover-wrap {
+  position: relative;
+  flex: 0 0 132px;
+  background: var(--bg-tertiary);
+}
+.meal-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.meal-card-body {
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
   flex: 1;
+  min-width: 0;
 }
-.game-card-title { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
-.game-meta-row { display: flex; flex-wrap: wrap; gap: var(--spacing-md); }
-.game-meta { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
-.game-card-tags { margin-top: 2px; }
-.game-view-btn { margin-top: auto; justify-content: center; }
-
-/* ---------- complexity badge ---------- */
-.complexity-badge {
+.meal-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
+.meal-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.meal-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.meal-chip {
   display: inline-flex;
   align-items: center;
+  gap: 3px;
   padding: 3px 10px;
   border-radius: var(--radius-full);
-  font-size: 0.7rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.76rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: #fff;
+  white-space: nowrap;
 }
-.complexity-badge.easy { background: var(--color-volunteer); }
-.complexity-badge.medium { background: var(--color-leadership); }
-.complexity-badge.heavy { background: var(--color-service); }
-.game-cover-wrap .complexity-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  box-shadow: var(--shadow-md);
+.meal-cat-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.meal-view-btn { margin-top: auto; align-self: flex-start; }
+
+/* narrow cards: stack cover on top */
+@media (max-width: 460px) {
+  .meal-card { flex-direction: column; }
+  .meal-cover-wrap { flex-basis: auto; aspect-ratio: 16 / 9; }
+  .meal-view-btn { align-self: stretch; justify-content: center; }
+}
+
+/* ---------- list view: one wide card per row ---------- */
+.meals-grid.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+.meals-grid.list-view .meal-cover-wrap { flex-basis: 180px; }
+.meals-grid.list-view .meal-desc { -webkit-line-clamp: 3; }
+@media (max-width: 560px) {
+  .meals-grid.list-view .meal-cover-wrap { flex-basis: 110px; }
 }
 
 /* ---------- modal layer ---------- */
-/* ---------- modal layer ---------- */
-.game-modal-overlay {
+.meal-modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.65);
@@ -276,102 +246,29 @@
   transition: opacity 0.2s ease;
   overflow-y: auto;
 }
-.game-modal-overlay.open { opacity: 1; }
+.meal-modal-overlay.open { opacity: 1; }
 .details-overlay { z-index: 10000; }
-.game-modal {
+.meal-modal {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  max-width: 640px;
+  max-width: 720px;
   width: 100%;
-  max-height: 88vh;
+  max-height: 90vh;
   overflow-y: auto;
   position: relative;
   transform: scale(0.96);
   transition: transform 0.2s ease;
   box-shadow: var(--shadow-xl);
 }
-.game-modal-overlay.open .game-modal { transform: scale(1); }
+.meal-modal-overlay.open .meal-modal { transform: scale(1); }
 .picker-modal {
   max-width: 860px;
   width: 95%;
   max-height: 92vh;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
 }
-
-/* ---------- step wizard UI ---------- */
-.picker-steps-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-md) 0 var(--spacing-xl);
-  border-bottom: 1px solid var(--border-color-light);
-}
-.step-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-xs);
-  flex: 1;
-}
-.step-num {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-full);
-  background: var(--bg-tertiary);
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.9rem;
-  border: 2px solid var(--border-color);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.step-text {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  transition: all 0.3s ease;
-}
-.step-line {
-  height: 2px;
-  background: var(--border-color);
-  flex: 1.5;
-  margin: 0 var(--spacing-xs);
-  margin-top: -24px;
-  transition: all 0.3s ease;
-}
-.step-indicator.active .step-num {
-  background: var(--primary-blue);
-  color: #fff;
-  border-color: var(--primary-blue);
-  box-shadow: 0 0 12px rgba(0, 102, 255, 0.35);
-}
-.step-indicator.active .step-text {
-  color: var(--text-primary);
-}
-.step-indicator.completed .step-num {
-  background: #10b981;
-  color: #fff;
-  border-color: #10b981;
-}
-.step-indicator.completed .step-text {
-  color: var(--text-secondary);
-}
-.step-line.completed {
-  background: #10b981;
-}
-.picker-step-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  margin-bottom: var(--spacing-xl);
-  transition: all 0.2s ease;
-}
-.game-modal-close {
+.meal-modal-close {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -389,16 +286,16 @@
   z-index: 2;
   transition: all 0.2s ease;
 }
-.game-modal-close:hover { background: var(--color-service); color: #fff; border-color: transparent; }
-.game-modal-body { padding: var(--spacing-2xl); }
+.meal-modal-close:hover { background: var(--color-service, #ef4444); color: #fff; border-color: transparent; }
+.meal-modal-body { padding: var(--spacing-2xl); }
 
-/* ---------- game details ---------- */
-.game-details {
+/* ---------- meal details ---------- */
+.meal-details {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
 }
-.game-details-cover-wrap {
+.meal-details-cover-wrap {
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-lg);
@@ -406,43 +303,44 @@
   background: var(--bg-tertiary);
 }
 @media (min-width: 641px) {
-  .game-details {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: var(--spacing-xl);
-  }
-  .game-details-cover-wrap {
-    flex: 0 0 200px;
-    aspect-ratio: 3 / 4;
-  }
-  .game-details-info {
-    flex: 1;
-  }
+  .meal-details { flex-direction: row; align-items: flex-start; gap: var(--spacing-xl); }
+  .meal-details-cover-wrap { flex: 0 0 240px; aspect-ratio: 1 / 1; }
+  .meal-details-info { flex: 1; min-width: 0; }
 }
-.game-details-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
-.game-details-head {
+.meal-details-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
+.meal-details-title { font-size: 1.6rem; font-weight: 800; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+.meal-details-desc { color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+.meal-meta-row { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-bottom: var(--spacing-md); }
+.meal-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+}
+.meal-nutrition {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
   flex-wrap: wrap;
-  margin-bottom: var(--spacing-sm);
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
 }
-.game-details-title { font-size: 1.6rem; font-weight: 800; color: var(--text-primary); }
-.game-details-desc { color: var(--text-secondary); margin: var(--spacing-md) 0 var(--spacing-lg); }
-.game-details-links {
+.nutrition-item { font-size: 0.85rem; color: var(--text-secondary); }
+.nutrition-item strong { color: var(--text-primary); font-weight: 800; }
+.meal-details-actions {
   display: flex;
   gap: var(--spacing-sm);
-  margin: var(--spacing-md) 0 var(--spacing-lg);
   flex-wrap: wrap;
+  margin-bottom: var(--spacing-md);
 }
-.game-details-links .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-}
-.game-details-section { margin-top: var(--spacing-lg); }
-.game-details-section h4 {
+.meal-details-actions .btn { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.meal-details-section { margin-top: var(--spacing-lg); }
+.meal-details-section h4 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -450,11 +348,83 @@
   font-weight: 700;
   margin-bottom: var(--spacing-sm);
 }
+.category-tag {
+  background: var(--bg-tertiary);
+  color: var(--primary-blue);
+  border: 1px solid var(--border-color);
+  font-weight: 700;
+}
 
-/* ---------- picker ---------- */
+/* ---------- rendered recipe body ---------- */
+.meal-recipe {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--border-color-light);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.meal-recipe .recipe-heading {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: var(--spacing-xl) 0 var(--spacing-sm);
+}
+.meal-recipe .recipe-heading:first-child { margin-top: 0; }
+.meal-recipe .recipe-subheading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: var(--spacing-lg) 0 var(--spacing-xs);
+}
+.meal-recipe p { margin: var(--spacing-sm) 0; }
+.meal-recipe .recipe-list,
+.meal-recipe .recipe-steps { margin: var(--spacing-sm) 0 var(--spacing-md) var(--spacing-lg); }
+.meal-recipe .recipe-list li { margin-bottom: 4px; list-style: disc; }
+.meal-recipe .recipe-steps li { margin-bottom: var(--spacing-sm); list-style: decimal; padding-left: 4px; }
+.meal-recipe a { color: var(--primary-blue); }
+.meal-recipe strong { color: var(--text-primary); }
+
+/* ---------- picker step wizard ---------- */
 .picker-content { padding: var(--spacing-2xl); }
-.picker-title { font-size: 1.6rem; font-weight: 800; color: var(--text-primary); }
+.picker-title { font-size: 1.6rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
 .picker-sub { color: var(--text-muted); margin-bottom: var(--spacing-xl); }
+.picker-steps-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md) 0 var(--spacing-xl);
+  border-bottom: 1px solid var(--border-color-light);
+}
+.step-indicator { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-xs); flex: 1; }
+.step-num {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.step-text { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); transition: all 0.3s ease; }
+.step-line { height: 2px; background: var(--border-color); flex: 1.5; margin: -24px var(--spacing-xs) 0; transition: all 0.3s ease; }
+.step-indicator.active .step-num { background: var(--primary-blue); color: #fff; border-color: var(--primary-blue); box-shadow: 0 0 12px rgba(0, 102, 255, 0.35); }
+.step-indicator.active .step-text { color: var(--text-primary); }
+.step-indicator.completed .step-num { background: #10b981; color: #fff; border-color: #10b981; }
+.step-indicator.completed .step-text { color: var(--text-secondary); }
+.step-line.completed { background: #10b981; }
+.picker-step-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
 .picker-section { margin-bottom: var(--spacing-xl); }
 .picker-section-title {
   font-size: 0.8rem;
@@ -477,11 +447,8 @@
   transition: all 0.15s ease;
 }
 .picker-pill:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
-.picker-pill.active {
-  background: var(--primary-blue);
-  color: #fff;
-  border-color: var(--primary-blue);
-}
+.picker-pill.active { background: var(--primary-blue); color: #fff; border-color: var(--primary-blue); }
+.picker-expand-btn { border-style: dashed; color: var(--primary-blue); font-weight: 700; }
 .picker-inline {
   margin-top: var(--spacing-md);
   display: flex;
@@ -527,29 +494,28 @@
   background: var(--bg-tertiary);
   box-shadow: var(--shadow-lg);
 }
-.reel-cover { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.reel-cover { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
 .reel-title { padding: var(--spacing-md); font-weight: 700; color: var(--text-primary); }
 .reel-caption { margin-top: var(--spacing-lg); color: var(--text-muted); font-weight: 600; }
 .picker-reel.cycle { animation: card-cycle 0.18s ease; }
 
 /* result */
-.picker-result { text-align: center; }
+.picker-result { text-align: center; animation: reveal-pop 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.2); }
 .picker-result-cover {
   width: 100%;
   max-width: 360px;
   margin: 0 auto var(--spacing-md);
   border-radius: var(--radius-lg);
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
   box-shadow: var(--shadow-lg);
 }
 .picker-result-title { font-size: 1.7rem; font-weight: 800; color: var(--text-primary); margin: var(--spacing-sm) 0; }
 .picker-result-desc { color: var(--text-secondary); max-width: 480px; margin: 0 auto var(--spacing-lg); }
-.picker-result-tags { justify-content: center; margin-bottom: var(--spacing-xl); }
+.picker-result-chips { justify-content: center; margin-bottom: var(--spacing-xl); }
 .picker-note { color: var(--text-muted); font-style: italic; margin-bottom: var(--spacing-md); }
 .picker-result-actions { display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; }
-.picker-result { animation: reveal-pop 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.2); }
 
 /* matching grid */
 .picker-matching-head {
@@ -563,7 +529,7 @@
 .picker-matching-head > div { display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap; }
 .picker-match-count { font-weight: 700; color: var(--text-secondary); }
 .picker-match-controls { display: flex; align-items: center; gap: var(--spacing-sm); flex-wrap: wrap; }
-.picker-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.picker-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
 
 /* empty */
 .picker-empty { text-align: center; padding: var(--spacing-2xl) 0; }
@@ -614,8 +580,9 @@
 /* ---------- responsive ---------- */
 @media (max-width: 640px) {
   .library-hero h1 { font-size: 1.75rem; }
-  .game-modal-body, .picker-content { padding: var(--spacing-lg); }
-  .games-grid { grid-template-columns: 1fr; }
+  .meal-modal-body, .picker-content { padding: var(--spacing-lg); }
+  .meals-grid { grid-template-columns: 1fr; }
+  .meals-search-row { flex-wrap: wrap; }
 }
 
 /* ---------- reduced motion ---------- */
@@ -623,5 +590,5 @@
   .picker-reel.cycle,
   .picker-result,
   .confetti-piece { animation: none !important; }
-  .game-card { transition: none; }
+  .meal-card { transition: none; }
 }

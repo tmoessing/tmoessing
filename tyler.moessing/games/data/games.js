@@ -1,5 +1,5 @@
 /**
- * Board game library data.
+ * Game library data.
  *
  * Each GAMES entry:
  *   id           unique slug (string)
@@ -351,7 +351,7 @@ export const GAMES = [
     maxPlayers: 10,
     playtimeMin: 1,
     playtimeMax: 10,
-    categories: ["Card Game", "Party", "Competitive", "Legacy"],
+    categories: ["Card Game", "Party", "Competitive"],
     complexity: "easy",
     tags: ["Humor", "Player Elimination", "Take That", "Chaos", "Real-Time", "Legacies Expansion", "Legacy Mechanics"],
     bggUrl: "https://boardgamegeek.com/boardgame/31016/we-didnt-playtest-all",

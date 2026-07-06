@@ -1,5 +1,5 @@
 /**
- * Shared modal layer for the board game library.
+ * Shared modal layer for the game library.
  *
  * - openModal(html) / closeModal(): generic overlay with backdrop + Escape +
  *   close-button dismissal and a fade/scale-in via the `.open` class.
