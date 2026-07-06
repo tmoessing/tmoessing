@@ -45,6 +45,10 @@
   margin-bottom: var(--spacing-xl);
 }
 .games-count { font-weight: 700; color: var(--text-secondary); }
+#game-search-input:focus {
+  border-color: var(--primary-blue) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
 .toolbar-controls { display: flex; gap: var(--spacing-sm); align-items: center; flex-wrap: wrap; }
 .toolbar-controls label,
 .picker-match-controls label {

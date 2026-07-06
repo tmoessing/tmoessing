@@ -25,6 +25,10 @@
         </div>
 
         <div class="library-toolbar">
+            <div class="search-input-wrapper" style="position: relative; flex: 1; max-width: 320px; display: flex; align-items: center;">
+                <svg class="icon icon-stroke search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: 12px; width: 1.1rem; height: 1.1rem; stroke: var(--text-muted); pointer-events: none;"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                <input type="text" id="game-search-input" placeholder="Search games..." style="width: 100%; padding: 9px 12px 9px 38px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--card-bg); color: var(--text-primary); font-size: 0.9rem; outline: none; transition: all 0.2s ease;">
+            </div>
             <span id="games-count" class="games-count"></span>
             <div class="toolbar-controls">
                 <div class="view-toggle" role="group" aria-label="View mode">
