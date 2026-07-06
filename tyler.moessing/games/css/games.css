@@ -45,9 +45,30 @@
   margin-bottom: var(--spacing-xl);
 }
 .games-count { font-weight: 700; color: var(--text-secondary); }
-#game-search-input:focus {
+.game-search-box-container:focus-within {
   border-color: var(--primary-blue) !important;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+.suggestion-item {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.suggestion-item:hover, .suggestion-item.active {
+  background: var(--bg-tertiary);
+  color: var(--primary-blue);
+}
+.suggestion-type {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 700;
 }
 .toolbar-controls { display: flex; gap: var(--spacing-sm); align-items: center; flex-wrap: wrap; }
 .toolbar-controls label,
